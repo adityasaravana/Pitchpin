@@ -14,8 +14,11 @@
 		59FF74042A594CEF00749B23 /* Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FF74032A594CEF00749B23 /* Pin.swift */; };
 		59FF74062A594D4900749B23 /* Recording.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FF74052A594D4900749B23 /* Recording.swift */; };
 		59FF74082A5A8AE700749B23 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FF74072A5A8AE700749B23 /* AudioManager.swift */; };
-		59FF740A2A5A8B0500749B23 /* RecordingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FF74092A5A8B0500749B23 /* RecordingsView.swift */; };
 		59FF740C2A5A8FD900749B23 /* RecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FF740B2A5A8FD900749B23 /* RecordButton.swift */; };
+		59FF740E2A5B572600749B23 /* FileManager.documentsDirectoryURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FF740D2A5B572600749B23 /* FileManager.documentsDirectoryURL.swift */; };
+		59FF74122A5B58FD00749B23 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FF74112A5B58FD00749B23 /* RecordView.swift */; };
+		59FF74152A5B5D3F00749B23 /* FDWaveformView in Frameworks */ = {isa = PBXBuildFile; productRef = 59FF74142A5B5D3F00749B23 /* FDWaveformView */; };
+		59FF74172A5B5D4900749B23 /* WaveformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FF74162A5B5D4900749B23 /* WaveformView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,8 +30,10 @@
 		59FF74032A594CEF00749B23 /* Pin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pin.swift; sourceTree = "<group>"; };
 		59FF74052A594D4900749B23 /* Recording.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recording.swift; sourceTree = "<group>"; };
 		59FF74072A5A8AE700749B23 /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
-		59FF74092A5A8B0500749B23 /* RecordingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingsView.swift; sourceTree = "<group>"; };
 		59FF740B2A5A8FD900749B23 /* RecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordButton.swift; sourceTree = "<group>"; };
+		59FF740D2A5B572600749B23 /* FileManager.documentsDirectoryURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.documentsDirectoryURL.swift; sourceTree = "<group>"; };
+		59FF74112A5B58FD00749B23 /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
+		59FF74162A5B5D4900749B23 /* WaveformView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59FF74152A5B5D3F00749B23 /* FDWaveformView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -45,6 +51,7 @@
 		59FF73E72A594BE600749B23 = {
 			isa = PBXGroup;
 			children = (
+				59FF740D2A5B572600749B23 /* FileManager.documentsDirectoryURL.swift */,
 				59FF74072A5A8AE700749B23 /* AudioManager.swift */,
 				59FF74052A594D4900749B23 /* Recording.swift */,
 				59FF74032A594CEF00749B23 /* Pin.swift */,
@@ -66,8 +73,9 @@
 			children = (
 				59FF73F32A594BE600749B23 /* PitchpinApp.swift */,
 				59FF73F52A594BE600749B23 /* ContentView.swift */,
-				59FF74092A5A8B0500749B23 /* RecordingsView.swift */,
+				59FF74112A5B58FD00749B23 /* RecordView.swift */,
 				59FF740B2A5A8FD900749B23 /* RecordButton.swift */,
+				59FF74162A5B5D4900749B23 /* WaveformView.swift */,
 				59FF73F72A594BE700749B23 /* Assets.xcassets */,
 				59FF73F92A594BE700749B23 /* Preview Content */,
 			);
@@ -98,6 +106,9 @@
 			dependencies = (
 			);
 			name = Pitchpin;
+			packageProductDependencies = (
+				59FF74142A5B5D3F00749B23 /* FDWaveformView */,
+			);
 			productName = Pitchpin;
 			productReference = 59FF73F02A594BE600749B23 /* Pitchpin.app */;
 			productType = "com.apple.product-type.application";
@@ -126,6 +137,9 @@
 				Base,
 			);
 			mainGroup = 59FF73E72A594BE600749B23;
+			packageReferences = (
+				59FF74132A5B5D3F00749B23 /* XCRemoteSwiftPackageReference "FDWaveformView" */,
+			);
 			productRefGroup = 59FF73F12A594BE600749B23 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -154,9 +168,11 @@
 			files = (
 				59FF74062A594D4900749B23 /* Recording.swift in Sources */,
 				59FF73F62A594BE600749B23 /* ContentView.swift in Sources */,
-				59FF740A2A5A8B0500749B23 /* RecordingsView.swift in Sources */,
+				59FF74172A5B5D4900749B23 /* WaveformView.swift in Sources */,
+				59FF74122A5B58FD00749B23 /* RecordView.swift in Sources */,
 				59FF740C2A5A8FD900749B23 /* RecordButton.swift in Sources */,
 				59FF73F42A594BE600749B23 /* PitchpinApp.swift in Sources */,
+				59FF740E2A5B572600749B23 /* FileManager.documentsDirectoryURL.swift in Sources */,
 				59FF74082A5A8AE700749B23 /* AudioManager.swift in Sources */,
 				59FF74042A594CEF00749B23 /* Pin.swift in Sources */,
 			);
@@ -361,6 +377,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		59FF74132A5B5D3F00749B23 /* XCRemoteSwiftPackageReference "FDWaveformView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/fulldecent/FDWaveformView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		59FF74142A5B5D3F00749B23 /* FDWaveformView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 59FF74132A5B5D3F00749B23 /* XCRemoteSwiftPackageReference "FDWaveformView" */;
+			productName = FDWaveformView;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 59FF73E82A594BE600749B23 /* Project object */;
 }

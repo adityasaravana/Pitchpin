@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "fdwaveformview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/fulldecent/FDWaveformView.git",
+      "state" : {
+        "revision" : "8ddf6107d54dccb3892f0a1aa70d5431d61d75f6",
+        "version" : "5.0.1"
+      }
+    }
+  ],
+  "version" : 2
+}

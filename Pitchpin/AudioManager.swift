@@ -9,19 +9,24 @@ import Foundation
 import AVFoundation
 
 class AudioManager: NSObject, ObservableObject, AVAudioPlayerDelegate {
+    private let jsonURL = URL(fileURLWithPath: "Pitchpin Recording Data", relativeTo: FileManager.documentsDirectoryURL).appendingPathExtension("json")
     static let shared = AudioManager()
     
     var audioRecorder: AVAudioRecorder!
     var audioPlayer: AVAudioPlayer!
     
     @Published var isRecording: Bool = false
-    @Published var recordings: [Recording] = []
+    @Published var recordings: [Recording] = [] {
+        didSet {
+            saveJSON()
+        }
+    }
     
     
     override init() {
         super.init()
+        loadJSON()
     }
-    
     
     func record(to recording: inout Recording) {
         let recordingSession = AVAudioSession.sharedInstance()
@@ -33,11 +38,10 @@ class AudioManager: NSObject, ObservableObject, AVAudioPlayerDelegate {
             print("Can not setup the Recording")
         }
         
-        let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        let filePath = path.appendingPathComponent("PitchPin Recording - ID: \(recording.id.uuidString).m4a")
+        let path = FileManager.documentsDirectoryURL
+        let filePath = path.appendingPathComponent("Pitchpin Recording - ID: \(recording.id.uuidString).m4a")
         
         recording.audio = filePath
-        
         
         let settings = [
             AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
@@ -73,17 +77,19 @@ class AudioManager: NSObject, ObservableObject, AVAudioPlayerDelegate {
             }
         }
     
-    func fetchRecordings() {
-            
-        let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        let directoryContents = try! FileManager.default.contentsOfDirectory(at: path, includingPropertiesForKeys: nil)
-
-        for url in directoryContents {
-            recordings.append(Recording(created: getFileCreationDate(from: url), audio: url))
-        }
-            
-        recordings.sort(by: { $0.created.compare($1.created) == .orderedDescending})
-    }
+//    func fetchRecordings() {
+//
+//        let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+//        let directoryContents = try! FileManager.default.contentsOfDirectory(at: path, includingPropertiesForKeys: nil)
+//
+//
+//        for url in directoryContents {
+//
+//            recordings.append(Recording(created: getFileCreationDate(from: url), audio: url))
+//        }
+//
+//        recordings.sort(by: { $0.created.compare($1.created) == .orderedDescending})
+//    }
     
     func play(from url: URL) {
       
@@ -143,6 +149,35 @@ class AudioManager: NSObject, ObservableObject, AVAudioPlayerDelegate {
                     break
                 }
             }
+        }
+    }
+}
+
+extension AudioManager {
+    func loadJSON() {
+        guard FileManager.default.fileExists(atPath: jsonURL.path) else {
+            return
+        }
+        
+        let decoder = JSONDecoder()
+        
+        do {
+            let data = try Data(contentsOf: jsonURL)
+            recordings = try decoder.decode([Recording].self, from: data)
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func saveJSON() {
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        
+        do {
+            let data = try encoder.encode(recordings)
+            try data.write(to: jsonURL, options: .atomicWrite)
+        } catch {
+            print(error.localizedDescription)
         }
     }
 }
