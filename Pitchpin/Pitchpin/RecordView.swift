@@ -12,26 +12,30 @@ import DSWaveformImage
 struct RecordView: View {
     @EnvironmentObject var audioManager: AudioManager
     @State var recording = Recording(audio: nil)
+    @State var recordingNameLocal = "Untitled Recording"
+    @State var recordingDescriptionLocal = ""
     @State var liveConfiguration: Waveform.Configuration = Waveform.Configuration(
         style: .striped(.init(color: .red, width: 3, spacing: 3))
     )
     
+    @State var showActionButtons = false
+    
     var body: some View {
-        NavigationStack {
-            VStack {
-                Image(systemName: "globe")
-                    .imageScale(.large)
-                    .foregroundColor(.accentColor)
-                Text("Hello, world!")
-                
-                WaveformLiveCanvas(
-                    samples: audioManager.samples,
-                    configuration: liveConfiguration,
-                    renderer: LinearWaveformRenderer(),
-                    shouldDrawSilencePadding: true
-                )
-                
-                
+        VStack {
+            TextField("", text: $recordingNameLocal).bold().font(.title)
+            TextField("", text: $recordingDescriptionLocal)
+                .placeholder(when: recordingDescriptionLocal.isEmpty) {
+                       Text("Notes...").foregroundColor(.gray)
+                }
+            
+            WaveformLiveCanvas(
+                samples: audioManager.samples,
+                configuration: liveConfiguration,
+                renderer: LinearWaveformRenderer(),
+                shouldDrawSilencePadding: true
+            )
+            
+            if !showActionButtons {
                 RecordButton(isRecording: $audioManager.isRecording) {
                     print("recording")
                     audioManager.record(to: &recording)
@@ -40,16 +44,18 @@ struct RecordView: View {
                     print("ending recording session")
                 }
                 .frame(width: 70, height: 70)
-            }
-            .padding()
-            .toolbar {
-                //                ToolbarItem(placement: .navigationBarTrailing, content: {
-                //                    NavigationLink(destination: RecordingsView().environmentObject(audioManager), label: {
-                //                        Image(systemName: "archivebox")
-                //                    })
-                //                })
+            } else {
+                Button {
+                    #error("add save and delete buttons")
+                } label: {
+                    
+                }
             }
         }
+        .multilineTextAlignment(.center)
+        .padding()
+        .background(Color.black.opacity(0.9).edgesIgnoringSafeArea(.all))
+        .foregroundColor(.white)
     }
 }
 

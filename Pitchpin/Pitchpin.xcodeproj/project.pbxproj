@@ -21,6 +21,7 @@
 		59FF741F2A5B65C500749B23 /* DSWaveformImage in Frameworks */ = {isa = PBXBuildFile; productRef = 59FF741E2A5B65C500749B23 /* DSWaveformImage */; };
 		59FF74212A5B65C500749B23 /* DSWaveformImageViews in Frameworks */ = {isa = PBXBuildFile; productRef = 59FF74202A5B65C500749B23 /* DSWaveformImageViews */; };
 		59FF74252A5B799500749B23 /* SCAudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 59FF74242A5B799500749B23 /* SCAudioManager.m */; };
+		59FF74272A5B7EE100749B23 /* View.placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FF74262A5B7EE100749B23 /* View.placeholder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		59FF74222A5B799400749B23 /* Pitchpin-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Pitchpin-Bridging-Header.h"; sourceTree = "<group>"; };
 		59FF74232A5B799500749B23 /* SCAudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCAudioManager.h; sourceTree = "<group>"; };
 		59FF74242A5B799500749B23 /* SCAudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCAudioManager.m; sourceTree = "<group>"; };
+		59FF74262A5B7EE100749B23 /* View.placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.placeholder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 			children = (
 				59FF74232A5B799500749B23 /* SCAudioManager.h */,
 				59FF74242A5B799500749B23 /* SCAudioManager.m */,
+				59FF74262A5B7EE100749B23 /* View.placeholder.swift */,
 				59FF740D2A5B572600749B23 /* FileManager.documentsDirectoryURL.swift */,
 				59FF74072A5A8AE700749B23 /* AudioManager.swift */,
 				59FF74052A594D4900749B23 /* Recording.swift */,
@@ -184,6 +187,7 @@
 				59FF74122A5B58FD00749B23 /* RecordView.swift in Sources */,
 				59FF740C2A5A8FD900749B23 /* RecordButton.swift in Sources */,
 				59FF73F42A594BE600749B23 /* PitchpinApp.swift in Sources */,
+				59FF74272A5B7EE100749B23 /* View.placeholder.swift in Sources */,
 				59FF740E2A5B572600749B23 /* FileManager.documentsDirectoryURL.swift in Sources */,
 				59FF74082A5A8AE700749B23 /* AudioManager.swift in Sources */,
 				59FF74042A594CEF00749B23 /* Pin.swift in Sources */,

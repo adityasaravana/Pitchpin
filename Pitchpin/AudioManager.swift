@@ -22,6 +22,7 @@ class AudioManager: NSObject, ObservableObject, AVAudioPlayerDelegate {
     @Published var samples: [Float] = []
     @Published var recordingTime: TimeInterval = 0
     @Published var isRecording: Bool = false
+    
     @Published var recordings: [Recording] = [] {
         didSet {
             saveJSON()
@@ -41,7 +42,6 @@ class AudioManager: NSObject, ObservableObject, AVAudioPlayerDelegate {
     
     func record(to recording: inout Recording) {
         samples = []
-        audioManager.startRecording()
         
         let recordingSession = AVAudioSession.sharedInstance()
         
@@ -69,8 +69,7 @@ class AudioManager: NSObject, ObservableObject, AVAudioPlayerDelegate {
             audioRecorder = try AVAudioRecorder(url: filePath, settings: settings)
             audioRecorder.prepareToRecord()
             audioRecorder.record()
-//            isRecording = true
-            
+            audioManager.startRecording()
         } catch {
             print("Failed to Setup the Recording")
         }
@@ -80,7 +79,6 @@ class AudioManager: NSObject, ObservableObject, AVAudioPlayerDelegate {
     func stopRecording() {
         audioManager.stopRecording()
         audioRecorder.stop()
-//        isRecording = false
     }
     
     func getFileCreationDate(from file: URL) -> Date {
