@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var audioManager: AudioManager
+    @State var recording = Recording(audio: nil)
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -15,11 +18,20 @@ struct ContentView: View {
                     .imageScale(.large)
                     .foregroundColor(.accentColor)
                 Text("Hello, world!")
+                
+                RecordButton(isRecording: $audioManager.isRecording) {
+                    print("recording")
+                    audioManager.record(to: &recording)
+                } stopAction: {
+                    audioManager.stopRecording()
+                    print("ending recording session")
+                }
+                .frame(width: 70, height: 70)
             }
             .padding()
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing, content: {
-                    NavigationLink(destination: SavedFilesView(), label: {
+                    NavigationLink(destination: RecordingsView().environmentObject(audioManager), label: {
                         Image(systemName: "archivebox")
                     })
                 })
@@ -30,6 +42,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView().environmentObject(AudioManager.shared)
     }
 }

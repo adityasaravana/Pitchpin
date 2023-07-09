@@ -11,7 +11,7 @@ import SwiftUI
 struct PitchpinApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView().environmentObject(AudioManager.shared)
         }
     }
 }

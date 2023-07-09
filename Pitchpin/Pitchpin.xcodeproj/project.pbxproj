@@ -11,9 +11,11 @@
 		59FF73F62A594BE600749B23 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FF73F52A594BE600749B23 /* ContentView.swift */; };
 		59FF73F82A594BE700749B23 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59FF73F72A594BE700749B23 /* Assets.xcassets */; };
 		59FF73FB2A594BE700749B23 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59FF73FA2A594BE700749B23 /* Preview Assets.xcassets */; };
-		59FF74022A594C7F00749B23 /* SavedFilesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FF74012A594C7F00749B23 /* SavedFilesView.swift */; };
 		59FF74042A594CEF00749B23 /* Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FF74032A594CEF00749B23 /* Pin.swift */; };
-		59FF74062A594D4900749B23 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FF74052A594D4900749B23 /* File.swift */; };
+		59FF74062A594D4900749B23 /* Recording.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FF74052A594D4900749B23 /* Recording.swift */; };
+		59FF74082A5A8AE700749B23 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FF74072A5A8AE700749B23 /* AudioManager.swift */; };
+		59FF740A2A5A8B0500749B23 /* RecordingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FF74092A5A8B0500749B23 /* RecordingsView.swift */; };
+		59FF740C2A5A8FD900749B23 /* RecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FF740B2A5A8FD900749B23 /* RecordButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,9 +24,11 @@
 		59FF73F52A594BE600749B23 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		59FF73F72A594BE700749B23 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		59FF73FA2A594BE700749B23 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		59FF74012A594C7F00749B23 /* SavedFilesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedFilesView.swift; sourceTree = "<group>"; };
 		59FF74032A594CEF00749B23 /* Pin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pin.swift; sourceTree = "<group>"; };
-		59FF74052A594D4900749B23 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		59FF74052A594D4900749B23 /* Recording.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recording.swift; sourceTree = "<group>"; };
+		59FF74072A5A8AE700749B23 /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
+		59FF74092A5A8B0500749B23 /* RecordingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingsView.swift; sourceTree = "<group>"; };
+		59FF740B2A5A8FD900749B23 /* RecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,7 +45,8 @@
 		59FF73E72A594BE600749B23 = {
 			isa = PBXGroup;
 			children = (
-				59FF74052A594D4900749B23 /* File.swift */,
+				59FF74072A5A8AE700749B23 /* AudioManager.swift */,
+				59FF74052A594D4900749B23 /* Recording.swift */,
 				59FF74032A594CEF00749B23 /* Pin.swift */,
 				59FF73F22A594BE600749B23 /* Pitchpin */,
 				59FF73F12A594BE600749B23 /* Products */,
@@ -61,7 +66,8 @@
 			children = (
 				59FF73F32A594BE600749B23 /* PitchpinApp.swift */,
 				59FF73F52A594BE600749B23 /* ContentView.swift */,
-				59FF74012A594C7F00749B23 /* SavedFilesView.swift */,
+				59FF74092A5A8B0500749B23 /* RecordingsView.swift */,
+				59FF740B2A5A8FD900749B23 /* RecordButton.swift */,
 				59FF73F72A594BE700749B23 /* Assets.xcassets */,
 				59FF73F92A594BE700749B23 /* Preview Content */,
 			);
@@ -146,10 +152,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				59FF74062A594D4900749B23 /* File.swift in Sources */,
+				59FF74062A594D4900749B23 /* Recording.swift in Sources */,
 				59FF73F62A594BE600749B23 /* ContentView.swift in Sources */,
+				59FF740A2A5A8B0500749B23 /* RecordingsView.swift in Sources */,
+				59FF740C2A5A8FD900749B23 /* RecordButton.swift in Sources */,
 				59FF73F42A594BE600749B23 /* PitchpinApp.swift in Sources */,
-				59FF74022A594C7F00749B23 /* SavedFilesView.swift in Sources */,
+				59FF74082A5A8AE700749B23 /* AudioManager.swift in Sources */,
 				59FF74042A594CEF00749B23 /* Pin.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -282,6 +290,7 @@
 				DEVELOPMENT_TEAM = E2RJE8M8Y3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Pitchpin needs microphone access to record your audio.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -311,6 +320,7 @@
 				DEVELOPMENT_TEAM = E2RJE8M8Y3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Pitchpin needs microphone access to record your audio.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

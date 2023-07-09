@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  Recording.swift
 //  Pitchpin
 //
 //  Created by Aditya Saravana on 7/8/23.
@@ -7,7 +7,9 @@
 
 import Foundation
 
-struct File: Codable {
+struct Recording: Codable, Identifiable {
+    var playing: Bool = false
+    
     var id = UUID()
     var created = Date()
     
@@ -15,5 +17,5 @@ struct File: Codable {
     var description: String? = nil
     
     var pins: [Pin] = []
-    var audio: URL
+    var audio: URL?
 }

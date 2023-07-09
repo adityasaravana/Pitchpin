@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct Pin: Codable {
+struct Pin: Codable, Identifiable {
     var id = UUID()
+    var title: String 
     var notes: String
 }
