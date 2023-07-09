@@ -47,6 +47,7 @@ struct ContentView: View {
             .navigationTitle(Text("Recordings"))
             .onAppear { refresh() }
             .refreshable { refresh() }
+            .sheet(isPresented: $showRecordView) { RecordView().environmentObject(audioManager) }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button { showRecordView = true } label: { Image(systemName: "plus") }

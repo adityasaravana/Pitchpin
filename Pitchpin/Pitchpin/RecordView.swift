@@ -6,10 +6,15 @@
 //
 
 import SwiftUI
+import DSWaveformImageViews
+import DSWaveformImage
 
 struct RecordView: View {
     @EnvironmentObject var audioManager: AudioManager
     @State var recording = Recording(audio: nil)
+    @State var liveConfiguration: Waveform.Configuration = Waveform.Configuration(
+        style: .striped(.init(color: .red, width: 3, spacing: 3))
+    )
     
     var body: some View {
         NavigationStack {
@@ -18,6 +23,14 @@ struct RecordView: View {
                     .imageScale(.large)
                     .foregroundColor(.accentColor)
                 Text("Hello, world!")
+                
+                WaveformLiveCanvas(
+                    samples: audioManager.samples,
+                    configuration: liveConfiguration,
+                    renderer: LinearWaveformRenderer(),
+                    shouldDrawSilencePadding: true
+                )
+                
                 
                 RecordButton(isRecording: $audioManager.isRecording) {
                     print("recording")
@@ -45,3 +58,4 @@ struct RecordView_Previews: PreviewProvider {
         RecordView().environmentObject(AudioManager.shared)
     }
 }
+

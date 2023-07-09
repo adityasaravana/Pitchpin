@@ -7,6 +7,8 @@
 
 import Foundation
 import AVFoundation
+import DSWaveformImage
+import DSWaveformImageViews
 
 class AudioManager: NSObject, ObservableObject, AVAudioPlayerDelegate {
     private let jsonURL = URL(fileURLWithPath: "Pitchpin Recording Data", relativeTo: FileManager.documentsDirectoryURL).appendingPathExtension("json")
@@ -15,6 +17,10 @@ class AudioManager: NSObject, ObservableObject, AVAudioPlayerDelegate {
     var audioRecorder: AVAudioRecorder!
     var audioPlayer: AVAudioPlayer!
     
+    private let audioManager: SCAudioManager
+    
+    @Published var samples: [Float] = []
+    @Published var recordingTime: TimeInterval = 0
     @Published var isRecording: Bool = false
     @Published var recordings: [Recording] = [] {
         didSet {
@@ -24,11 +30,19 @@ class AudioManager: NSObject, ObservableObject, AVAudioPlayerDelegate {
     
     
     override init() {
+        audioManager = SCAudioManager()
+        
         super.init()
+        
+        audioManager.prepareAudioRecording()
+        audioManager.recordingDelegate = self
         loadJSON()
     }
     
     func record(to recording: inout Recording) {
+        samples = []
+        audioManager.startRecording()
+        
         let recordingSession = AVAudioSession.sharedInstance()
         
         do {
@@ -64,6 +78,7 @@ class AudioManager: NSObject, ObservableObject, AVAudioPlayerDelegate {
     
     
     func stopRecording() {
+        audioManager.stopRecording()
         audioRecorder.stop()
 //        isRecording = false
     }
@@ -154,6 +169,7 @@ class AudioManager: NSObject, ObservableObject, AVAudioPlayerDelegate {
 }
 
 extension AudioManager {
+    // MARK: - JSON
     func loadJSON() {
         guard FileManager.default.fileExists(atPath: jsonURL.path) else {
             return
@@ -179,5 +195,23 @@ extension AudioManager {
         } catch {
             print(error.localizedDescription)
         }
+    }
+}
+
+extension AudioManager: RecordingDelegate {
+    // MARK: - RecordingDelegate
+
+    func audioManager(_ manager: SCAudioManager!, didAllowRecording flag: Bool) {}
+
+    func audioManager(_ manager: SCAudioManager!, didFinishRecordingSuccessfully flag: Bool) {}
+
+    func audioManager(_ manager: SCAudioManager!, didUpdateRecordProgress progress: CGFloat) {
+        let linear = 1 - pow(10, manager.lastAveragePower() / 20)
+
+        // Here we add the same sample 3 times to speed up the animation.
+        // Usually you'd just add the sample once.
+        recordingTime = audioManager.currentRecordingTime
+        samples += [linear, linear, linear]
+        print(samples)
     }
 }
