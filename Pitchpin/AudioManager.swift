@@ -23,16 +23,16 @@ class AudioManager: NSObject, ObservableObject, AVAudioPlayerDelegate {
     @Published var recordingTime: TimeInterval = 0
     @Published var isRecording: Bool = false
     
-    @Published var recordings: [Recording] = [] {
+    @Published var recordings: [Recording] {
         didSet {
             saveJSON()
         }
     }
     
     
-    override init() {
+    init(recordings: [Recording] = []) {
         audioManager = SCAudioManager()
-        
+        self.recordings = recordings
         super.init()
         
         audioManager.prepareAudioRecording()
@@ -115,7 +115,7 @@ class AudioManager: NSObject, ObservableObject, AVAudioPlayerDelegate {
         }
             
         do {
-            audioPlayer = try AVAudioPlayer(contentsOf : url)
+            audioPlayer = try AVAudioPlayer(contentsOf: url)
             audioPlayer.prepareToPlay()
             audioPlayer.play()
                 
@@ -126,14 +126,14 @@ class AudioManager: NSObject, ObservableObject, AVAudioPlayerDelegate {
             }
                 
         } catch {
-            print("Playing Failed")
+            print("Playing Failed - \(error.localizedDescription)")
         }
                 
     }
 
     func stopPlaying(from url: URL) {
       
-        audioPlayer.stop()
+        audioPlayer?.stop()
       
         for recording in 0 ..< recordings.count {
             if recordings[recording].audio == url {

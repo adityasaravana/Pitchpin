@@ -10,6 +10,7 @@ import DSWaveformImageViews
 import DSWaveformImage
 
 struct RecordView: View {
+    @Environment(\.dismiss) var dismiss
     @EnvironmentObject var audioManager: AudioManager
     @State var recording = Recording(audio: nil)
     @State var recordingNameLocal = "Untitled Recording"
@@ -21,47 +22,91 @@ struct RecordView: View {
     @State var showActionButtons = false
     
     var body: some View {
-        VStack {
-            TextField("", text: $recordingNameLocal).bold().font(.title)
-            TextField("", text: $recordingDescriptionLocal)
-                .placeholder(when: recordingDescriptionLocal.isEmpty) {
-                       Text("Notes...").foregroundColor(.gray)
+        NavigationStack {
+            VStack {
+                TextField("", text: $recordingNameLocal).bold().font(.title).padding()
+                TextField("", text: $recordingDescriptionLocal)
+                    .placeholder(when: recordingDescriptionLocal.isEmpty) {
+                           Text("Notes...").foregroundColor(.gray)
+                    }
+                
+                WaveformLiveCanvas(
+                    samples: audioManager.samples,
+                    configuration: liveConfiguration,
+                    renderer: LinearWaveformRenderer(),
+                    shouldDrawSilencePadding: true
+                )
+                
+                if !showActionButtons {
+                    RecordButton(isRecording: $audioManager.isRecording) {
+                        print("recording")
+                        audioManager.record(to: &recording)
+                    } stopAction: {
+                        audioManager.stopRecording()
+                        withAnimation {
+                            showActionButtons = true
+                        }
+                        print("ending recording session")
+                    }
+                    .frame(width: 70, height: 70)
+                } else {
+                    HStack {
+                        Button {
+                            recording = Recording(audio: nil)
+                            withAnimation {
+                                showActionButtons = false
+                            }
+                        } label: {
+                            ZStack {
+                                Circle()
+                                    .fill(.red)
+                                    .frame(width: 70, height: 70)
+                                Image(systemName: "trash").font(.system(size: 25))
+                            }
+                        }
+                        
+                        Spacer()
+                        
+                        Button {
+                            recording.name = recordingNameLocal
+                            recording.description = recordingDescriptionLocal
+                            recording.created = Date()
+                            audioManager.recordings.append(recording)
+                            dismiss()
+//                            recording = Recording(audio: nil)
+                        } label: {
+                            ZStack {
+                                Circle()
+                                    .fill(.blue)
+                                    .frame(width: 70, height: 70)
+                                Text("Save".uppercased())
+                            }
+                        }
+                        
+                        
+                    }.padding(.horizontal)
                 }
-            
-            WaveformLiveCanvas(
-                samples: audioManager.samples,
-                configuration: liveConfiguration,
-                renderer: LinearWaveformRenderer(),
-                shouldDrawSilencePadding: true
-            )
-            
-            if !showActionButtons {
-                RecordButton(isRecording: $audioManager.isRecording) {
-                    print("recording")
-                    audioManager.record(to: &recording)
-                } stopAction: {
-                    audioManager.stopRecording()
-                    print("ending recording session")
-                }
-                .frame(width: 70, height: 70)
-            } else {
-                Button {
-                    #error("add save and delete buttons")
-                } label: {
-                    
+            }
+            .padding()
+            .multilineTextAlignment(.center)
+            .background(Color.black.opacity(0.9).edgesIgnoringSafeArea(.all))
+            .foregroundColor(.white)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image(systemName: "xmark").fontWeight(.semibold)
+                    }
                 }
             }
         }
-        .multilineTextAlignment(.center)
-        .padding()
-        .background(Color.black.opacity(0.9).edgesIgnoringSafeArea(.all))
-        .foregroundColor(.white)
     }
 }
 
 struct RecordView_Previews: PreviewProvider {
     static var previews: some View {
-        RecordView().environmentObject(AudioManager.shared)
+        RecordView(showActionButtons: true).environmentObject(AudioManager.shared)
     }
 }
 

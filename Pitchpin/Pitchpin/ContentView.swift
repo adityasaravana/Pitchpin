@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-    
+
 
 struct ContentView: View {
     @EnvironmentObject var audioManager: AudioManager
@@ -20,7 +20,7 @@ struct ContentView: View {
             Group {
                 if audioManager.recordings.count <= 0 {
                     VStack {
-                        Text("Looks like you haven't recorded anything yet.").bold()
+                        Text("Looks like you haven't recorded anything yet.").bold().multilineTextAlignment(.center)
                         Button("Start Recording") { showRecordView = true }
                     }
                     .padding()
@@ -29,18 +29,15 @@ struct ContentView: View {
                 } else {
                     List {
                         ForEach(audioManager.recordings) { recording in
-                            Text(recording.name ?? "Recording - \(recording.id)").swipeActions(edge: .trailing) {
-                                Button {
-                                    if let audio = recording.audio {
-                                        withAnimation {
-                                            audioManager.deleteRecording(url: audio)
-                                        }
-                                    }
-                                } label: {
-                                    Label("Delete", systemImage: "trash")
-                                }.tint(.red)
+                            RecordingRow(recording: recording)
+                        }.onDelete { indexSet in
+                            withAnimation {
+                                #warning("delete the audio file if available")
+                                audioManager.recordings.remove(atOffsets: indexSet)
                             }
                         }
+                    }.toolbar {
+                        EditButton()
                     }
                 }
             }
@@ -59,6 +56,41 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environmentObject(AudioManager.shared)
+        ContentView().environmentObject(AudioManager(recordings: [Recording(name: "Recording", description: "Description"), Recording(name: "Recording", description: "Description")]))
+        RecordingRow(recording: Recording(name: "Name", audio: URL(string: "hallo")!))
+    }
+}
+
+struct RecordingRow: View {
+    @EnvironmentObject var audioManager: AudioManager
+    var recording: Recording
+    
+    var body: some View {
+        Group {
+            HStack {
+                VStack {
+                    Text(recording.name ?? "Untitled Recording")
+                    if !(recording.description?.isEmpty ?? true) && recording.description != nil {
+                        Text(recording.description!)
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                    }
+                }
+                Spacer()
+                if recording.audio != nil {
+                    Button(action: {
+                        if recording.playing == true {
+                            audioManager.stopPlaying(from: recording.audio!)
+                        } else {
+                            audioManager.play(from: recording.audio!)
+                        }
+                    }) {
+                        Image(systemName: recording.playing ? "stop.fill" : "play.fill")
+                        //                            .foregroundColor(.white)
+                            .font(.system(size:20))
+                    }
+                }
+            }
+        }
     }
 }
