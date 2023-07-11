@@ -15,8 +15,8 @@ class AudioManager: NSObject, ObservableObject, AVAudioPlayerDelegate {
     private let jsonURL = URL(fileURLWithPath: "Pitchpin Recording Data", relativeTo: FileManager.documentsDirectoryURL).appendingPathExtension("json")
     static let shared = AudioManager()
     
-    var recorder: AVAudioRecorder!
-    var player = ModernAVPlayer()
+    @Published var recorder: AVAudioRecorder!
+    @Published var player = ModernAVPlayer()
     
     private let audioManager: SCAudioManager
     
@@ -29,7 +29,6 @@ class AudioManager: NSObject, ObservableObject, AVAudioPlayerDelegate {
             saveJSON()
         }
     }
-    
     
     init(recordings: [Recording] = []) {
         audioManager = SCAudioManager()
@@ -54,7 +53,7 @@ class AudioManager: NSObject, ObservableObject, AVAudioPlayerDelegate {
         }
         
         let path = FileManager.documentsDirectoryURL
-        let filePath = path.appendingPathComponent("\(recording.id.uuidString).m4a")
+        let filePath = path.appendingPathComponent("\(recording.id).m4a")
         
         recording.audio = filePath
         
