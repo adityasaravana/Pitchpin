@@ -27,6 +27,13 @@ struct RecorderBar: View {
     var body: some View {
         VStack {
             
+            WaveformLiveCanvas(
+                samples: waveformManager.samples,
+                configuration: liveConfiguration,
+                renderer: LinearWaveformRenderer(),
+                shouldDrawSilencePadding: true
+            )
+            
             if let audioRecorder = audioRecorder.audioRecorder, audioRecorder.isRecording {
                 TimelineView(.periodic(from: .now, by: 1)) { _ in
                     // recording duration

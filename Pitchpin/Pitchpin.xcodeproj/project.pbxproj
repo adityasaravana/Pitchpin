@@ -44,7 +44,7 @@
 		594D2A4B2A5D241900EA231C /* SCAudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCAudioManager.m; path = "../Pitchpin-Old/SCAudioManager.m"; sourceTree = "<group>"; };
 		594D2A4C2A5D241A00EA231C /* SCAudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCAudioManager.h; path = "../Pitchpin-Old/SCAudioManager.h"; sourceTree = "<group>"; };
 		594D2A4E2A5D243600EA231C /* WaveformManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformManager.swift; sourceTree = "<group>"; };
-		59BFFCFA2A5D2804007B5EBE /* DSWaveformImage-main-2 */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "DSWaveformImage-main-2"; path = "../../../../Downloads/DSWaveformImage-main-2"; sourceTree = "<group>"; };
+		59BFFD002A5D28A1007B5EBE /* DSWaveformImage */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DSWaveformImage; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,7 +63,7 @@
 		027811AC2889753F00A4A61D = {
 			isa = PBXGroup;
 			children = (
-				59BFFCFA2A5D2804007B5EBE /* DSWaveformImage-main-2 */,
+				59BFFD002A5D28A1007B5EBE /* DSWaveformImage */,
 				594D2A4A2A5D241900EA231C /* Pitchpin-Bridging-Header.h */,
 				594D2A4C2A5D241A00EA231C /* SCAudioManager.h */,
 				594D2A4B2A5D241900EA231C /* SCAudioManager.m */,
@@ -157,7 +157,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1400;
-				LastUpgradeCheck = 1400;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					027811B42889753F00A4A61D = {
 						CreatedOnToolsVersion = 14.0;
@@ -224,6 +224,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -253,9 +254,11 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -282,6 +285,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -311,9 +315,11 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -338,6 +344,7 @@
 				CODE_SIGN_ENTITLEMENTS = Pitchpin/Pitchpin.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Pitchpin/Preview Content\"";
 				DEVELOPMENT_TEAM = E2RJE8M8Y3;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -381,6 +388,7 @@
 				CODE_SIGN_ENTITLEMENTS = Pitchpin/Pitchpin.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Pitchpin/Preview Content\"";
 				DEVELOPMENT_TEAM = E2RJE8M8Y3;
 				ENABLE_HARDENED_RUNTIME = YES;
