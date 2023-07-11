@@ -9,13 +9,14 @@ import Foundation
 import AVFoundation
 import DSWaveformImage
 import DSWaveformImageViews
+import ModernAVPlayer
 
 class AudioManager: NSObject, ObservableObject, AVAudioPlayerDelegate {
     private let jsonURL = URL(fileURLWithPath: "Pitchpin Recording Data", relativeTo: FileManager.documentsDirectoryURL).appendingPathExtension("json")
     static let shared = AudioManager()
     
-    var audioRecorder: AVAudioRecorder!
-    var audioPlayer: AVAudioPlayer!
+    var recorder: AVAudioRecorder!
+    var player = ModernAVPlayer()
     
     private let audioManager: SCAudioManager
     
@@ -53,7 +54,7 @@ class AudioManager: NSObject, ObservableObject, AVAudioPlayerDelegate {
         }
         
         let path = FileManager.documentsDirectoryURL
-        let filePath = path.appendingPathComponent("Pitchpin Recording - ID: \(recording.id.uuidString).m4a")
+        let filePath = path.appendingPathComponent("\(recording.id.uuidString).m4a")
         
         recording.audio = filePath
         
@@ -66,9 +67,9 @@ class AudioManager: NSObject, ObservableObject, AVAudioPlayerDelegate {
         
         
         do {
-            audioRecorder = try AVAudioRecorder(url: filePath, settings: settings)
-            audioRecorder.prepareToRecord()
-            audioRecorder.record()
+            recorder = try AVAudioRecorder(url: filePath, settings: settings)
+            recorder.prepareToRecord()
+            recorder.record()
             audioManager.startRecording()
         } catch {
             print("Failed to Setup the Recording")
@@ -78,63 +79,50 @@ class AudioManager: NSObject, ObservableObject, AVAudioPlayerDelegate {
     
     func stopRecording() {
         audioManager.stopRecording()
-        audioRecorder.stop()
+        recorder?.stop()
     }
     
     func getFileCreationDate(from file: URL) -> Date {
-            if let attributes = try? FileManager.default.attributesOfItem(atPath: file.path) as [FileAttributeKey: Any],
-                let creationDate = attributes[FileAttributeKey.creationDate] as? Date {
-                return creationDate
-            } else {
-                return Date()
-            }
+        if let attributes = try? FileManager.default.attributesOfItem(atPath: file.path) as [FileAttributeKey: Any],
+           let creationDate = attributes[FileAttributeKey.creationDate] as? Date {
+            return creationDate
+        } else {
+            return Date()
         }
+    }
     
-//    func fetchRecordings() {
-//
-//        let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-//        let directoryContents = try! FileManager.default.contentsOfDirectory(at: path, includingPropertiesForKeys: nil)
-//
-//
-//        for url in directoryContents {
-//
-//            recordings.append(Recording(created: getFileCreationDate(from: url), audio: url))
-//        }
-//
-//        recordings.sort(by: { $0.created.compare($1.created) == .orderedDescending})
-//    }
+    //    func fetchRecordings() {
+    //
+    //        let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+    //        let directoryContents = try! FileManager.default.contentsOfDirectory(at: path, includingPropertiesForKeys: nil)
+    //
+    //
+    //        for url in directoryContents {
+    //
+    //            recordings.append(Recording(created: getFileCreationDate(from: url), audio: url))
+    //        }
+    //
+    //        recordings.sort(by: { $0.created.compare($1.created) == .orderedDescending})
+    //    }
     
     func play(from url: URL) {
-      
-        let playSession = AVAudioSession.sharedInstance()
-            
-        do {
-            try playSession.overrideOutputAudioPort(AVAudioSession.PortOverride.speaker)
-        } catch {
-            print("Playing failed in Device")
-        }
-            
-        do {
-            audioPlayer = try AVAudioPlayer(contentsOf: url)
-            audioPlayer.prepareToPlay()
-            audioPlayer.play()
-                
-            for i in 0 ..< recordings.count{
-                if recordings[i].audio == url {
-                    recordings[i].playing = true
-                }
+        player.stop()
+        
+        let media = ModernAVPlayerMedia(url: url, type: .clip)
+        player.load(media: media, autostart: false)
+        player.play()
+        
+        for i in 0 ..< recordings.count{
+            if recordings[i].audio == url {
+                recordings[i].playing = true
             }
-                
-        } catch {
-            print("Playing Failed - \(error.localizedDescription)")
         }
-                
     }
-
+    
     func stopPlaying(from url: URL) {
-      
-        audioPlayer?.stop()
-      
+        
+        player.stop()
+        
         for recording in 0 ..< recordings.count {
             if recordings[recording].audio == url {
                 recordings[recording].playing = false
@@ -143,13 +131,13 @@ class AudioManager: NSObject, ObservableObject, AVAudioPlayerDelegate {
     }
     
     func deleteRecording(url : URL){
-            
+        
         do {
             try FileManager.default.removeItem(at : url)
         } catch {
             print("Can't delete")
         }
-            
+        
         for i in 0 ..< recordings.count {
             if recordings[i].audio != nil {
                 if recordings[i].audio == url {
@@ -198,14 +186,14 @@ extension AudioManager {
 
 extension AudioManager: RecordingDelegate {
     // MARK: - RecordingDelegate
-
+    
     func audioManager(_ manager: SCAudioManager!, didAllowRecording flag: Bool) {}
-
+    
     func audioManager(_ manager: SCAudioManager!, didFinishRecordingSuccessfully flag: Bool) {}
-
+    
     func audioManager(_ manager: SCAudioManager!, didUpdateRecordProgress progress: CGFloat) {
         let linear = 1 - pow(10, manager.lastAveragePower() / 20)
-
+        
         // Here we add the same sample 3 times to speed up the animation.
         // Usually you'd just add the sample once.
         recordingTime = audioManager.currentRecordingTime

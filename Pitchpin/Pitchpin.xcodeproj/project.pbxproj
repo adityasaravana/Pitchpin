@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		59FAAE602A5D14BF0078DC49 /* ModernAVPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 59FAAE5F2A5D14BF0078DC49 /* ModernAVPlayer */; };
+		59FAAE622A5D14BF0078DC49 /* RxModernAVPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 59FAAE612A5D14BF0078DC49 /* RxModernAVPlayer */; };
 		59FF73F42A594BE600749B23 /* PitchpinApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FF73F32A594BE600749B23 /* PitchpinApp.swift */; };
 		59FF73F62A594BE600749B23 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FF73F52A594BE600749B23 /* ContentView.swift */; };
 		59FF73F82A594BE700749B23 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59FF73F72A594BE700749B23 /* Assets.xcassets */; };
@@ -17,7 +19,6 @@
 		59FF740C2A5A8FD900749B23 /* RecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FF740B2A5A8FD900749B23 /* RecordButton.swift */; };
 		59FF740E2A5B572600749B23 /* FileManager.documentsDirectoryURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FF740D2A5B572600749B23 /* FileManager.documentsDirectoryURL.swift */; };
 		59FF74122A5B58FD00749B23 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FF74112A5B58FD00749B23 /* RecordView.swift */; };
-		59FF74172A5B5D4900749B23 /* WaveformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FF74162A5B5D4900749B23 /* WaveformView.swift */; };
 		59FF741F2A5B65C500749B23 /* DSWaveformImage in Frameworks */ = {isa = PBXBuildFile; productRef = 59FF741E2A5B65C500749B23 /* DSWaveformImage */; };
 		59FF74212A5B65C500749B23 /* DSWaveformImageViews in Frameworks */ = {isa = PBXBuildFile; productRef = 59FF74202A5B65C500749B23 /* DSWaveformImageViews */; };
 		59FF74252A5B799500749B23 /* SCAudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 59FF74242A5B799500749B23 /* SCAudioManager.m */; };
@@ -36,7 +37,6 @@
 		59FF740B2A5A8FD900749B23 /* RecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordButton.swift; sourceTree = "<group>"; };
 		59FF740D2A5B572600749B23 /* FileManager.documentsDirectoryURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.documentsDirectoryURL.swift; sourceTree = "<group>"; };
 		59FF74112A5B58FD00749B23 /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
-		59FF74162A5B5D4900749B23 /* WaveformView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformView.swift; sourceTree = "<group>"; };
 		59FF74222A5B799400749B23 /* Pitchpin-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Pitchpin-Bridging-Header.h"; sourceTree = "<group>"; };
 		59FF74232A5B799500749B23 /* SCAudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCAudioManager.h; sourceTree = "<group>"; };
 		59FF74242A5B799500749B23 /* SCAudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCAudioManager.m; sourceTree = "<group>"; };
@@ -49,7 +49,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				59FF741F2A5B65C500749B23 /* DSWaveformImage in Frameworks */,
+				59FAAE602A5D14BF0078DC49 /* ModernAVPlayer in Frameworks */,
 				59FF74212A5B65C500749B23 /* DSWaveformImageViews in Frameworks */,
+				59FAAE622A5D14BF0078DC49 /* RxModernAVPlayer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +61,7 @@
 		59FF73E72A594BE600749B23 = {
 			isa = PBXGroup;
 			children = (
+				59FF74222A5B799400749B23 /* Pitchpin-Bridging-Header.h */,
 				59FF74232A5B799500749B23 /* SCAudioManager.h */,
 				59FF74242A5B799500749B23 /* SCAudioManager.m */,
 				59FF74262A5B7EE100749B23 /* View.placeholder.swift */,
@@ -68,7 +71,6 @@
 				59FF74032A594CEF00749B23 /* Pin.swift */,
 				59FF73F22A594BE600749B23 /* Pitchpin */,
 				59FF73F12A594BE600749B23 /* Products */,
-				59FF74222A5B799400749B23 /* Pitchpin-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -87,7 +89,6 @@
 				59FF73F52A594BE600749B23 /* ContentView.swift */,
 				59FF74112A5B58FD00749B23 /* RecordView.swift */,
 				59FF740B2A5A8FD900749B23 /* RecordButton.swift */,
-				59FF74162A5B5D4900749B23 /* WaveformView.swift */,
 				59FF73F72A594BE700749B23 /* Assets.xcassets */,
 				59FF73F92A594BE700749B23 /* Preview Content */,
 			);
@@ -121,6 +122,8 @@
 			packageProductDependencies = (
 				59FF741E2A5B65C500749B23 /* DSWaveformImage */,
 				59FF74202A5B65C500749B23 /* DSWaveformImageViews */,
+				59FAAE5F2A5D14BF0078DC49 /* ModernAVPlayer */,
+				59FAAE612A5D14BF0078DC49 /* RxModernAVPlayer */,
 			);
 			productName = Pitchpin;
 			productReference = 59FF73F02A594BE600749B23 /* Pitchpin.app */;
@@ -134,7 +137,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					59FF73EF2A594BE600749B23 = {
 						CreatedOnToolsVersion = 14.3.1;
@@ -153,6 +156,7 @@
 			mainGroup = 59FF73E72A594BE600749B23;
 			packageReferences = (
 				59FF741D2A5B65C500749B23 /* XCRemoteSwiftPackageReference "DSWaveformImage" */,
+				59FAAE5E2A5D14BF0078DC49 /* XCRemoteSwiftPackageReference "ModernAVPlayer" */,
 			);
 			productRefGroup = 59FF73F12A594BE600749B23 /* Products */;
 			projectDirPath = "";
@@ -183,7 +187,6 @@
 				59FF74062A594D4900749B23 /* Recording.swift in Sources */,
 				59FF73F62A594BE600749B23 /* ContentView.swift in Sources */,
 				59FF74252A5B799500749B23 /* SCAudioManager.m in Sources */,
-				59FF74172A5B5D4900749B23 /* WaveformView.swift in Sources */,
 				59FF74122A5B58FD00749B23 /* RecordView.swift in Sources */,
 				59FF740C2A5A8FD900749B23 /* RecordButton.swift in Sources */,
 				59FF73F42A594BE600749B23 /* PitchpinApp.swift in Sources */,
@@ -247,7 +250,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -301,7 +304,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -323,12 +326,14 @@
 				DEVELOPMENT_TEAM = E2RJE8M8Y3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Pitchpin;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Pitchpin needs microphone access to record your audio.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -356,12 +361,14 @@
 				DEVELOPMENT_TEAM = E2RJE8M8Y3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Pitchpin;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Pitchpin needs microphone access to record your audio.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -400,6 +407,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		59FAAE5E2A5D14BF0078DC49 /* XCRemoteSwiftPackageReference "ModernAVPlayer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/noreasonprojects/ModernAVPlayer.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.7.3;
+			};
+		};
 		59FF741D2A5B65C500749B23 /* XCRemoteSwiftPackageReference "DSWaveformImage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dmrschmidt/DSWaveformImage.git";
@@ -411,6 +426,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		59FAAE5F2A5D14BF0078DC49 /* ModernAVPlayer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 59FAAE5E2A5D14BF0078DC49 /* XCRemoteSwiftPackageReference "ModernAVPlayer" */;
+			productName = ModernAVPlayer;
+		};
+		59FAAE612A5D14BF0078DC49 /* RxModernAVPlayer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 59FAAE5E2A5D14BF0078DC49 /* XCRemoteSwiftPackageReference "ModernAVPlayer" */;
+			productName = RxModernAVPlayer;
+		};
 		59FF741E2A5B65C500749B23 /* DSWaveformImage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 59FF741D2A5B65C500749B23 /* XCRemoteSwiftPackageReference "DSWaveformImage" */;

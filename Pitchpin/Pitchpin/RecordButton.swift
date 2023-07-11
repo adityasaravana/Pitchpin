@@ -141,11 +141,12 @@ struct RecordButtonShape: Shape {
     }
 }
 
-struct RecordingButton_Previews: PreviewProvider {
-    static var previews: some View {
-        RecordButton(isRecording: .constant(true), startAction: {}, stopAction: {})
-            .preferredColorScheme(.dark)
-        RecordButton(isRecording: .constant(false), startAction: {}, stopAction: {})
-            .preferredColorScheme(.dark)
-    }
+#Preview {
+    RecordButton(isRecording: .constant(true), startAction: {}, stopAction: {})
+        .preferredColorScheme(.dark)
+}
+
+#Preview {
+    RecordButton(isRecording: .constant(false), startAction: {}, stopAction: {})
+        .preferredColorScheme(.dark)
 }

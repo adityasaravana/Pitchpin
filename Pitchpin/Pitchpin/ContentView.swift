@@ -54,11 +54,12 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView().environmentObject(AudioManager(recordings: [Recording(name: "Recording", description: "Description"), Recording(name: "Recording", description: "Description")]))
-        RecordingRow(recording: Recording(name: "Name", audio: URL(string: "hallo")!))
-    }
+#Preview {
+    ContentView().environmentObject(AudioManager(recordings: [Recording(name: "Recording", description: "Description"), Recording(name: "Recording", description: "Description")]))
+}
+
+#Preview {
+    RecordingRow(recording: Recording(name: "Name", audio: URL(string: "hallo")!))
 }
 
 struct RecordingRow: View {

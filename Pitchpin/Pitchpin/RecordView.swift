@@ -104,9 +104,7 @@ struct RecordView: View {
     }
 }
 
-struct RecordView_Previews: PreviewProvider {
-    static var previews: some View {
-        RecordView(showActionButtons: true).environmentObject(AudioManager.shared)
-    }
+#Preview {
+    RecordView(showActionButtons: true).environmentObject(AudioManager.shared)
 }
 
