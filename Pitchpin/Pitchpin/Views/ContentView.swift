@@ -26,7 +26,7 @@ struct ContentView: View {
                 .safeAreaInset(edge: .bottom) {
                     bottomBar
                 }
-                .navigationTitle("Voice Recorder")
+                .navigationTitle("Recordings")
         }
     }
     

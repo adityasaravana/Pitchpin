@@ -8,15 +8,13 @@
 import SwiftUI
 
 @main
-struct VoiceRecTestApp: App {
+struct PitchpinApp: App {
     let persistenceController = PersistenceController.shared
 
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                // always use dark mode
-                .preferredColorScheme(.dark)
         }
     }
 }
