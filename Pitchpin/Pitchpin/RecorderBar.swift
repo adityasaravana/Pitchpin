@@ -6,12 +6,18 @@
 //
 
 import SwiftUI
+import DSWaveformImageViews
+import DSWaveformImage
 
 struct RecorderBar: View {
+    @ObservedObject var waveformManager = WaveformManager.shared
     @ObservedObject var audioRecorder = AudioRecorder()
     @ObservedObject var audioPlayer: AudioPlayer
     
     @State var buttonSize: CGFloat = 1
+    @State var liveConfiguration: Waveform.Configuration = Waveform.Configuration(
+        style: .striped(.init(color: .red, width: 3, spacing: 3))
+    )
     
     var repeatingAnimation: Animation {
         Animation.linear(duration: 0.5)

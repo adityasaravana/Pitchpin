@@ -19,6 +19,10 @@
 		027811D928897A9900A4A61D /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027811D828897A9900A4A61D /* AudioPlayer.swift */; };
 		027811DB28897AD200A4A61D /* RecordingsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027811DA28897AD200A4A61D /* RecordingsList.swift */; };
 		027811DD2889932100A4A61D /* PlayerBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027811DC2889932100A4A61D /* PlayerBar.swift */; };
+		594D2A4D2A5D241A00EA231C /* SCAudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 594D2A4B2A5D241900EA231C /* SCAudioManager.m */; };
+		594D2A4F2A5D243600EA231C /* WaveformManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594D2A4E2A5D243600EA231C /* WaveformManager.swift */; };
+		59BFFCFD2A5D2819007B5EBE /* DSWaveformImage in Frameworks */ = {isa = PBXBuildFile; productRef = 59BFFCFC2A5D2819007B5EBE /* DSWaveformImage */; };
+		59BFFCFF2A5D2819007B5EBE /* DSWaveformImageViews in Frameworks */ = {isa = PBXBuildFile; productRef = 59BFFCFE2A5D2819007B5EBE /* DSWaveformImageViews */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +40,11 @@
 		027811D828897A9900A4A61D /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		027811DA28897AD200A4A61D /* RecordingsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingsList.swift; sourceTree = "<group>"; };
 		027811DC2889932100A4A61D /* PlayerBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerBar.swift; sourceTree = "<group>"; };
+		594D2A4A2A5D241900EA231C /* Pitchpin-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Pitchpin-Bridging-Header.h"; sourceTree = "<group>"; };
+		594D2A4B2A5D241900EA231C /* SCAudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCAudioManager.m; path = "../Pitchpin-Old/SCAudioManager.m"; sourceTree = "<group>"; };
+		594D2A4C2A5D241A00EA231C /* SCAudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCAudioManager.h; path = "../Pitchpin-Old/SCAudioManager.h"; sourceTree = "<group>"; };
+		594D2A4E2A5D243600EA231C /* WaveformManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformManager.swift; sourceTree = "<group>"; };
+		59BFFCFA2A5D2804007B5EBE /* DSWaveformImage-main-2 */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "DSWaveformImage-main-2"; path = "../../../../Downloads/DSWaveformImage-main-2"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +52,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59BFFCFD2A5D2819007B5EBE /* DSWaveformImage in Frameworks */,
+				59BFFCFF2A5D2819007B5EBE /* DSWaveformImageViews in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,10 +63,17 @@
 		027811AC2889753F00A4A61D = {
 			isa = PBXGroup;
 			children = (
+				59BFFCFA2A5D2804007B5EBE /* DSWaveformImage-main-2 */,
+				594D2A4A2A5D241900EA231C /* Pitchpin-Bridging-Header.h */,
+				594D2A4C2A5D241A00EA231C /* SCAudioManager.h */,
+				594D2A4B2A5D241900EA231C /* SCAudioManager.m */,
 				027811D328897A5600A4A61D /* Extensions.swift */,
-				027811D528897A6800A4A61D /* AudioManager */,
+				027811D628897A8600A4A61D /* AudioRecorder.swift */,
+				027811D828897A9900A4A61D /* AudioPlayer.swift */,
+				594D2A4E2A5D243600EA231C /* WaveformManager.swift */,
 				027811B72889753F00A4A61D /* Pitchpin */,
 				027811B62889753F00A4A61D /* Products */,
+				59BFFCFB2A5D2819007B5EBE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -70,12 +88,15 @@
 		027811B72889753F00A4A61D /* Pitchpin */ = {
 			isa = PBXGroup;
 			children = (
-				027811CC2889786700A4A61D /* Views */,
+				027811BF2889753F00A4A61D /* ContentView.swift */,
+				027811DA28897AD200A4A61D /* RecordingsList.swift */,
+				027811DC2889932100A4A61D /* PlayerBar.swift */,
+				0236343D288A96D3008A0944 /* RecorderBar.swift */,
+				027811B82889753F00A4A61D /* PitchpinApp.swift */,
 				027811DE28899C9100A4A61D /* CoreData */,
 				027811C12889754300A4A61D /* Assets.xcassets */,
 				027811C32889754300A4A61D /* Pitchpin.entitlements */,
 				027811BC2889753F00A4A61D /* VoiceRecTest.xcdatamodeld */,
-				027811B82889753F00A4A61D /* PitchpinApp.swift */,
 				027811C42889754300A4A61D /* Preview Content */,
 			);
 			path = Pitchpin;
@@ -89,32 +110,19 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		027811CC2889786700A4A61D /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				027811BF2889753F00A4A61D /* ContentView.swift */,
-				027811DA28897AD200A4A61D /* RecordingsList.swift */,
-				027811DC2889932100A4A61D /* PlayerBar.swift */,
-				0236343D288A96D3008A0944 /* RecorderBar.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		027811D528897A6800A4A61D /* AudioManager */ = {
-			isa = PBXGroup;
-			children = (
-				027811D628897A8600A4A61D /* AudioRecorder.swift */,
-				027811D828897A9900A4A61D /* AudioPlayer.swift */,
-			);
-			path = AudioManager;
-			sourceTree = "<group>";
-		};
 		027811DE28899C9100A4A61D /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
 				027811BA2889753F00A4A61D /* Persistence.swift */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		59BFFCFB2A5D2819007B5EBE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -133,6 +141,10 @@
 			dependencies = (
 			);
 			name = Pitchpin;
+			packageProductDependencies = (
+				59BFFCFC2A5D2819007B5EBE /* DSWaveformImage */,
+				59BFFCFE2A5D2819007B5EBE /* DSWaveformImageViews */,
+			);
 			productName = VoiceRecTest;
 			productReference = 027811B52889753F00A4A61D /* Pitchpin.app */;
 			productType = "com.apple.product-type.application";
@@ -149,6 +161,7 @@
 				TargetAttributes = {
 					027811B42889753F00A4A61D = {
 						CreatedOnToolsVersion = 14.0;
+						LastSwiftMigration = 1500;
 					};
 				};
 			};
@@ -161,6 +174,8 @@
 				Base,
 			);
 			mainGroup = 027811AC2889753F00A4A61D;
+			packageReferences = (
+			);
 			productRefGroup = 027811B62889753F00A4A61D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -187,6 +202,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				594D2A4D2A5D241A00EA231C /* SCAudioManager.m in Sources */,
 				027811B92889753F00A4A61D /* PitchpinApp.swift in Sources */,
 				027811BB2889753F00A4A61D /* Persistence.swift in Sources */,
 				027811D928897A9900A4A61D /* AudioPlayer.swift in Sources */,
@@ -196,6 +212,7 @@
 				027811DD2889932100A4A61D /* PlayerBar.swift in Sources */,
 				027811DB28897AD200A4A61D /* RecordingsList.swift in Sources */,
 				027811D728897A8600A4A61D /* AudioRecorder.swift in Sources */,
+				594D2A4F2A5D243600EA231C /* WaveformManager.swift in Sources */,
 				027811D428897A5600A4A61D /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -317,6 +334,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Pitchpin/Pitchpin.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -347,6 +365,8 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Pitchpin-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -357,6 +377,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Pitchpin/Pitchpin.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -387,6 +408,7 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Pitchpin-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -414,6 +436,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		59BFFCFC2A5D2819007B5EBE /* DSWaveformImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DSWaveformImage;
+		};
+		59BFFCFE2A5D2819007B5EBE /* DSWaveformImageViews */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DSWaveformImageViews;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		027811BC2889753F00A4A61D /* VoiceRecTest.xcdatamodeld */ = {
