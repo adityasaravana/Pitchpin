@@ -49,6 +49,5 @@ extension WaveformManager: RecordingDelegate {
         // Usually you'd just add the sample once.
         recordingTime = waveformManager.currentRecordingTime
         samples += [linear, linear, linear]
-        print(samples)
     }
 }

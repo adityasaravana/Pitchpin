@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-
-
 struct ContentView: View {
     @EnvironmentObject var audioManager: AudioManager
     @State var showRecordView = false
