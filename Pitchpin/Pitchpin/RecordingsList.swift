@@ -23,7 +23,7 @@ struct RecordingsList: View {
             ForEach(recordings, id: \.id) { recording in
                 RecordingRow(audioPlayer: audioPlayer, recording: recording)
             }
-                .onDelete(perform: delete)
+            .onDelete(perform: delete)
         }
     }
     

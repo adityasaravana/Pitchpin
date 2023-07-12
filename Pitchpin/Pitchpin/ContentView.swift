@@ -35,7 +35,10 @@ struct ContentView: View {
             PlayerBar(audioPlayer: audioPlayer)
             RecorderBar(audioPlayer: audioPlayer)
         }
-        .background(.thinMaterial)
+        .shadow(radius: 40)
+        .cornerRadius(40, corners: [.topLeft, .topRight])
+        .background(Color.black.opacity(0.9))
+        
     }
     
 }

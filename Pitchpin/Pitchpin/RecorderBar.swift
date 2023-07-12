@@ -16,7 +16,7 @@ struct RecorderBar: View {
     
     @State var buttonSize: CGFloat = 1
     @State var liveConfiguration: Waveform.Configuration = Waveform.Configuration(
-        style: .striped(.init(color: .red, width: 3, spacing: 3))
+        style: .striped(.init(color: .red, width: 3, spacing: 3)), verticalScalingFactor: 0.5
     )
     
     var repeatingAnimation: Animation {
@@ -34,6 +34,7 @@ struct RecorderBar: View {
                 shouldDrawSilencePadding: true
             )
             
+            
             if let audioRecorder = audioRecorder.audioRecorder, audioRecorder.isRecording {
                 TimelineView(.periodic(from: .now, by: 1)) { _ in
                     // recording duration
@@ -47,14 +48,17 @@ struct RecorderBar: View {
             recordButton
         }
         .padding()
-        .frame(maxWidth: .infinity, alignment: .center)
+        .frame(maxHeight: 200, alignment: .center)
+        .onDisappear { waveformManager.stop() }
     }
     
     var recordButton: some View {
         Button {
             if audioRecorder.isRecording {
+                waveformManager.stop()
                 stopRecording()
             } else {
+                waveformManager.activate()
                 startRecording()
             }
         } label: {
