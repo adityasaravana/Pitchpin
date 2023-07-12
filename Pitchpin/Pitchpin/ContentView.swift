@@ -36,8 +36,7 @@ struct ContentView: View {
             RecorderBar(audioPlayer: audioPlayer)
         }
         .shadow(radius: 40)
-        .cornerRadius(40, corners: [.topLeft, .topRight])
-        .background(Color.black.opacity(0.9))
+        .background(Color.black.opacity(0.9).cornerRadius(30, corners: [.topLeft, .topRight]).edgesIgnoringSafeArea(.all))
         
     }
     

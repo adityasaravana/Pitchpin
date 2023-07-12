@@ -28,7 +28,7 @@ struct PlayerBar: View {
                         player.currentTime = sliderValue
                     }
                 }
-                    .tint(.primary)
+                .tint(.primary)
                 
                 // Time passed & Time remaining
                 HStack {
@@ -37,7 +37,7 @@ struct PlayerBar: View {
                     Text("-\(DateComponentsFormatter.positional.string(from: (player.duration - player.currentTime) ) ?? "0:00")")
                 }
                 .font(.caption)
-                .foregroundColor(.secondary)
+                .foregroundColor(.white)
                 
                 HStack(spacing: 15) {
                     // Play/Pause Button
@@ -53,12 +53,14 @@ struct PlayerBar: View {
                         Image(systemName: audioPlayer.isPlaying ? "pause.fill" : "play.fill")
                             .font(.title2)
                             .imageScale(.large)
+                            .foregroundColor(.white)
                     }
                     
                     // Recording name
                     Text(currentlyPlaying.name ?? "Recording")
                         .fontWeight(.semibold)
                         .lineLimit(1)
+                        .foregroundColor(.white)
                     
                     Spacer()
                     
@@ -67,6 +69,7 @@ struct PlayerBar: View {
                         audioPlayer.stopPlayback()
                     } label: {
                         Image(systemName: "xmark.circle.fill")
+                            .foregroundColor(.white)
                             .font(.title2)
                             .imageScale(.large)
                             .symbolRenderingMode(.hierarchical)
