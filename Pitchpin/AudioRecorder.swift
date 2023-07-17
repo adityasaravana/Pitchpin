@@ -69,7 +69,9 @@ class AudioRecorder: NSObject,ObservableObject {
     // MARK: - Stop Recording
     
     func stopRecording() {
+        
         audioRecorder?.stop()
+        
         withAnimation {
             isRecording = false
         }
