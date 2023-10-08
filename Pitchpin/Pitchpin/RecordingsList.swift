@@ -19,11 +19,17 @@ struct RecordingsList: View {
     private var recordings: FetchedResults<Recording>
     
     var body: some View {
-        List {
-            ForEach(recordings, id: \.id) { recording in
-                RecordingRow(audioPlayer: audioPlayer, recording: recording)
+        NavigationView {
+            List {
+                ForEach(recordings, id: \.id) { recording in
+                    RecordingRow(audioPlayer: audioPlayer, recording: recording) 
+                }
+                .onDelete(perform: delete)
             }
-            .onDelete(perform: delete)
+            .navigationTitle("Recordings")
+            .toolbar {
+                EditButton()
+            }
         }
     }
     

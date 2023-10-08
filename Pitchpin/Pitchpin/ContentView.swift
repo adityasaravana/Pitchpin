@@ -21,13 +21,12 @@ struct ContentView: View {
     
     
     var body: some View {
-        NavigationView {
             RecordingsList(audioPlayer: audioPlayer)
                 .safeAreaInset(edge: .bottom) {
                     bottomBar
                 }
-                .navigationTitle("Recordings")
-        }
+                
+        
     }
     
     var bottomBar: some View {
@@ -36,7 +35,11 @@ struct ContentView: View {
             RecorderBar(audioPlayer: audioPlayer)
         }
         .shadow(radius: 40)
-        .background(Color.gray.opacity(0.4).cornerRadius(30, corners: [.topLeft, .topRight]).edgesIgnoringSafeArea(.all))
+        .background(
+            Color.black
+                .opacity(0.8)
+//                .cornerRadius(30, corners: [.topLeft, .topRight]).edgesIgnoringSafeArea(.all)
+        )
         
     }
     

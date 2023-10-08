@@ -22,9 +22,8 @@
 		594D2A4D2A5D241A00EA231C /* SCAudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 594D2A4B2A5D241900EA231C /* SCAudioManager.m */; };
 		594D2A4F2A5D243600EA231C /* WaveformManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594D2A4E2A5D243600EA231C /* WaveformManager.swift */; };
 		59BFFD022A5E47C0007B5EBE /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BFFD012A5E47C0007B5EBE /* RoundedCorner.swift */; };
-		59C6179F2A6501C3003F8100 /* DSWaveformImage in Resources */ = {isa = PBXBuildFile; fileRef = 59BFFD002A5D28A1007B5EBE /* DSWaveformImage */; };
-		59C617A12A6501F0003F8100 /* DSWaveformImage in Frameworks */ = {isa = PBXBuildFile; productRef = 59C617A02A6501F0003F8100 /* DSWaveformImage */; };
-		59C617A32A6501F0003F8100 /* DSWaveformImageViews in Frameworks */ = {isa = PBXBuildFile; productRef = 59C617A22A6501F0003F8100 /* DSWaveformImageViews */; };
+		59D7178B2A7DCFD0005B0C49 /* DSWaveformImage in Frameworks */ = {isa = PBXBuildFile; productRef = 59D7178A2A7DCFD0005B0C49 /* DSWaveformImage */; };
+		59D7178D2A7DCFD0005B0C49 /* DSWaveformImageViews in Frameworks */ = {isa = PBXBuildFile; productRef = 59D7178C2A7DCFD0005B0C49 /* DSWaveformImageViews */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,7 +45,6 @@
 		594D2A4B2A5D241900EA231C /* SCAudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCAudioManager.m; sourceTree = "<group>"; };
 		594D2A4C2A5D241A00EA231C /* SCAudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCAudioManager.h; sourceTree = "<group>"; };
 		594D2A4E2A5D243600EA231C /* WaveformManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformManager.swift; sourceTree = "<group>"; };
-		59BFFD002A5D28A1007B5EBE /* DSWaveformImage */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DSWaveformImage; sourceTree = "<group>"; };
 		59BFFD012A5E47C0007B5EBE /* RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -55,8 +53,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				59C617A12A6501F0003F8100 /* DSWaveformImage in Frameworks */,
-				59C617A32A6501F0003F8100 /* DSWaveformImageViews in Frameworks */,
+				59D7178B2A7DCFD0005B0C49 /* DSWaveformImage in Frameworks */,
+				59D7178D2A7DCFD0005B0C49 /* DSWaveformImageViews in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,11 +64,10 @@
 		027811AC2889753F00A4A61D = {
 			isa = PBXGroup;
 			children = (
+				594D2A4A2A5D241900EA231C /* Pitchpin-Bridging-Header.h */,
 				027811D328897A5600A4A61D /* Extensions.swift */,
-				59BFFD002A5D28A1007B5EBE /* DSWaveformImage */,
 				59C6179E2A650177003F8100 /* Waveform */,
 				59C6179D2A65016C003F8100 /* Audio */,
-				594D2A4A2A5D241900EA231C /* Pitchpin-Bridging-Header.h */,
 				027811B72889753F00A4A61D /* Pitchpin */,
 				027811B62889753F00A4A61D /* Products */,
 				59BFFCFB2A5D2819007B5EBE /* Frameworks */,
@@ -162,8 +159,8 @@
 			);
 			name = Pitchpin;
 			packageProductDependencies = (
-				59C617A02A6501F0003F8100 /* DSWaveformImage */,
-				59C617A22A6501F0003F8100 /* DSWaveformImageViews */,
+				59D7178A2A7DCFD0005B0C49 /* DSWaveformImage */,
+				59D7178C2A7DCFD0005B0C49 /* DSWaveformImageViews */,
 			);
 			productName = VoiceRecTest;
 			productReference = 027811B52889753F00A4A61D /* Pitchpin.app */;
@@ -195,6 +192,7 @@
 			);
 			mainGroup = 027811AC2889753F00A4A61D;
 			packageReferences = (
+				59D717892A7DCFD0005B0C49 /* XCRemoteSwiftPackageReference "DSWaveformImage" */,
 			);
 			productRefGroup = 027811B62889753F00A4A61D /* Products */;
 			projectDirPath = "";
@@ -211,7 +209,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				027811C62889754300A4A61D /* Preview Assets.xcassets in Resources */,
-				59C6179F2A6501C3003F8100 /* DSWaveformImage in Resources */,
 				027811C22889754300A4A61D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -467,13 +464,26 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		59D717892A7DCFD0005B0C49 /* XCRemoteSwiftPackageReference "DSWaveformImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dmrschmidt/DSWaveformImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 13.0.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
-		59C617A02A6501F0003F8100 /* DSWaveformImage */ = {
+		59D7178A2A7DCFD0005B0C49 /* DSWaveformImage */ = {
 			isa = XCSwiftPackageProductDependency;
+			package = 59D717892A7DCFD0005B0C49 /* XCRemoteSwiftPackageReference "DSWaveformImage" */;
 			productName = DSWaveformImage;
 		};
-		59C617A22A6501F0003F8100 /* DSWaveformImageViews */ = {
+		59D7178C2A7DCFD0005B0C49 /* DSWaveformImageViews */ = {
 			isa = XCSwiftPackageProductDependency;
+			package = 59D717892A7DCFD0005B0C49 /* XCRemoteSwiftPackageReference "DSWaveformImage" */;
 			productName = DSWaveformImageViews;
 		};
 /* End XCSwiftPackageProductDependency section */

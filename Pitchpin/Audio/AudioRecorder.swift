@@ -81,7 +81,7 @@ class AudioRecorder: NSObject,ObservableObject {
                 let recordingDate = try Data(contentsOf: recordingURL)
                 print("Stop Recording - Saving to CoreData")
                 // save the recording to CoreData
-                saveRecordingOnCoreData(recordingData: recordingDate)
+                saveRecording(recordingData: recordingDate)
             } catch {
                 print("Stop Recording - Could not save to CoreData - Cannot get the recording data from URL: \(error)")
             }
@@ -94,7 +94,7 @@ class AudioRecorder: NSObject,ObservableObject {
     
     // MARK: - CoreData --------------------------------------
     
-    func saveRecordingOnCoreData(recordingData: Data) {
+    func saveRecording(recordingData: Data) {
         let newRecording = Recording(context: moc)
         newRecording.id = UUID()
         newRecording.name = recordingName

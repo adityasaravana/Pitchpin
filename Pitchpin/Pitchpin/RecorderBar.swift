@@ -21,12 +21,12 @@ struct RecorderBar: View {
     
     var repeatingAnimation: Animation {
         Animation.linear(duration: 0.5)
-        .repeatForever()
+            .repeatForever()
     }
     
     var body: some View {
         VStack {
-            
+            // TODO: - Only show this while recording but without making the button gigantic while it isn't.
             WaveformLiveCanvas(
                 samples: waveformManager.samples,
                 configuration: liveConfiguration,
@@ -45,9 +45,21 @@ struct RecorderBar: View {
                 .transition(.scale)
             }
             
-//            recordButton
+            
+            
+            
             GeometryReader { geometry in
                 ZStack {
+                    HStack {
+                        Button {
+                            
+                        } label: {
+                            ZStack {
+                                Image(systemName: "pin.circle.fill").font(.system(size: 50)).foregroundColor(.yellow)
+                            }
+                        }.padding()
+                        Spacer()
+                    }
                     let minDimension = min(geometry.size.width, geometry.size.height)
                     
                     Button {
@@ -62,9 +74,12 @@ struct RecorderBar: View {
                         RecordButtonShape(isRecording: audioRecorder.isRecording)
                             .fill(.red)
                     }
+                    
+                    
                     Circle()
                         .strokeBorder(lineWidth: minDimension * 0.05)
                         .foregroundColor(.white)
+                    
                 }
             }
         }
@@ -73,32 +88,6 @@ struct RecorderBar: View {
         .onDisappear { waveformManager.stop() }
     }
     
-    var recordButton: some View {
-        Button {
-            if audioRecorder.isRecording {
-                waveformManager.stop()
-                stopRecording()
-            } else {
-                waveformManager.activate()
-                startRecording()
-            }
-        } label: {
-            Image(systemName: audioRecorder.isRecording ? "stop.circle.fill" : "mic.circle.fill")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 65, height: 65)
-                .clipped()
-                .foregroundColor(.red)
-                .scaleEffect(buttonSize)
-                .onChange(of: audioRecorder.isRecording) { isRecording in
-                    if isRecording {
-                        withAnimation(repeatingAnimation) { buttonSize = 1.1 }
-                    } else {
-                        withAnimation { buttonSize = 1 }
-                    }
-                }
-        }
-    }
     
     func startRecording() {
         if audioPlayer.audioPlayer?.isPlaying ?? false {
@@ -121,10 +110,26 @@ struct RecorderBar: View {
     
 }
 
-struct RecorderBar_Previews: PreviewProvider {
-    static var previews: some View {
-        RecorderBar(audioPlayer: AudioPlayer())
+fileprivate struct PreviewView: View {
+    var body: some View {
+        VStack {
+            Spacer()
+            Text("Hello, world!")
+            Spacer()
+        }.safeAreaInset(edge: .bottom) {
+            RecorderBar(audioPlayer: AudioPlayer())
+                .shadow(radius: 40)
+                .background(
+                    Color.black
+                        .opacity(0.8)
+                    //                .cornerRadius(30, corners: [.topLeft, .topRight]).edgesIgnoringSafeArea(.all)
+                )
+        }
     }
+}
+
+#Preview {
+    PreviewView()
 }
 
 struct RecordButtonShape: Shape {
@@ -183,7 +188,7 @@ struct RecordButtonShape: Shape {
         
         let bottomRightControl1 = CGPoint(x: center.x + radius * b, y: center.y + radius * c)
         let bottomRightControl2 = CGPoint(x: center.x + radius * c, y: center.y + radius * b)
-    
+        
         var path = Path()
         
         path.move(to: rightTop)
@@ -195,7 +200,7 @@ struct RecordButtonShape: Shape {
         path.addLine(to: bottomRight)
         path.addCurve(to: rightBottom, control1: bottomRightControl1, control2: bottomRightControl2)
         path.addLine(to: rightTop)
-
+        
         return path
     }
 }
