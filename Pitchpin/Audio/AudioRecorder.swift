@@ -12,8 +12,9 @@ import Combine
 import CoreData
 
 class AudioRecorder: NSObject,ObservableObject {
+    var recordings = Recordings.shared
     
-    let moc = PersistenceController.shared.container.viewContext
+//    let moc = PersistenceController.shared.container.viewContext
 
     var audioRecorder: AVAudioRecorder?
     
@@ -92,24 +93,11 @@ class AudioRecorder: NSObject,ObservableObject {
         
     }
     
-    // MARK: - CoreData --------------------------------------
+    // MARK: - Saving Recordings --------------------------------------
     
     func saveRecording(recordingData: Data) {
-        let newRecording = Recording(context: moc)
-        newRecording.id = UUID()
-        newRecording.name = recordingName
-        newRecording.createdAt = recordingDate
-        newRecording.recordingData = recordingData
-        
-        do {
-            try moc.save()
-            print("Stop Recording - Successfully saved to CoreData")
-            // delete the recording stored in the temporary directory
-            deleteRecordingFile()
-        } catch {
-            let nsError = error as NSError
-            fatalError("Stop Recording - Failed to save to CoreData - Unresolved error \(nsError), \(nsError.userInfo)")
-        }
+        let newRecording = Recording(name: recordingName, created: recordingDate, data: recordingData)
+        recordings.recordings.append(newRecording)
     }
     
     func deleteRecordingFile() {

@@ -18,7 +18,7 @@ class AudioPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
     var audioPlayer: AVAudioPlayer?
     
     func startPlayback(recording: Recording) {
-        if let recordingData = recording.recordingData {
+        if let recordingData = recording.data {
             let playbackSession = AVAudioSession.sharedInstance()
             
             

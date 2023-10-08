@@ -9,19 +9,15 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-    @Environment(\.managedObjectContext) private var moc
+    @EnvironmentObject var recordings: Recordings
     @ObservedObject var audioPlayer = AudioPlayer()
-    
     @ObservedObject var audioRecorder = AudioRecorder()
     
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<Item>
     
     
     var body: some View {
             RecordingsList(audioPlayer: audioPlayer)
+            .environmentObject(recordings)
                 .safeAreaInset(edge: .bottom) {
                     bottomBar
                 }
@@ -47,6 +43,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        ContentView().environmentObject(Recordings.shared)
     }
 }

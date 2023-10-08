@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		0236343E288A96D3008A0944 /* RecorderBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0236343D288A96D3008A0944 /* RecorderBar.swift */; };
 		027811B92889753F00A4A61D /* PitchpinApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027811B82889753F00A4A61D /* PitchpinApp.swift */; };
-		027811BB2889753F00A4A61D /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027811BA2889753F00A4A61D /* Persistence.swift */; };
-		027811BE2889753F00A4A61D /* VoiceRecTest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 027811BC2889753F00A4A61D /* VoiceRecTest.xcdatamodeld */; };
 		027811C02889753F00A4A61D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027811BF2889753F00A4A61D /* ContentView.swift */; };
 		027811C22889754300A4A61D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 027811C12889754300A4A61D /* Assets.xcassets */; };
 		027811C62889754300A4A61D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 027811C52889754300A4A61D /* Preview Assets.xcassets */; };
@@ -24,14 +22,17 @@
 		59BFFD022A5E47C0007B5EBE /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BFFD012A5E47C0007B5EBE /* RoundedCorner.swift */; };
 		59D7178B2A7DCFD0005B0C49 /* DSWaveformImage in Frameworks */ = {isa = PBXBuildFile; productRef = 59D7178A2A7DCFD0005B0C49 /* DSWaveformImage */; };
 		59D7178D2A7DCFD0005B0C49 /* DSWaveformImageViews in Frameworks */ = {isa = PBXBuildFile; productRef = 59D7178C2A7DCFD0005B0C49 /* DSWaveformImageViews */; };
+		59FAD3ED2AD3704B00425775 /* Recording.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FAD3EC2AD3704B00425775 /* Recording.swift */; };
+		59FAD3EF2AD3712200425775 /* Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FAD3EE2AD3712200425775 /* Pin.swift */; };
+		59FAD3F12AD3720500425775 /* Recordings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FAD3F02AD3720500425775 /* Recordings.swift */; };
+		59FAD3F42AD372D500425775 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 59FAD3F32AD372D500425775 /* Defaults */; };
+		59FAD3F62AD3730300425775 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FAD3F52AD3730300425775 /* Defaults.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0236343D288A96D3008A0944 /* RecorderBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderBar.swift; sourceTree = "<group>"; };
 		027811B52889753F00A4A61D /* Pitchpin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pitchpin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		027811B82889753F00A4A61D /* PitchpinApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitchpinApp.swift; sourceTree = "<group>"; };
-		027811BA2889753F00A4A61D /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		027811BD2889753F00A4A61D /* VoiceRecTest.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VoiceRecTest.xcdatamodel; sourceTree = "<group>"; };
 		027811BF2889753F00A4A61D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		027811C12889754300A4A61D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		027811C32889754300A4A61D /* Pitchpin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pitchpin.entitlements; sourceTree = "<group>"; };
@@ -46,6 +47,10 @@
 		594D2A4C2A5D241A00EA231C /* SCAudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCAudioManager.h; sourceTree = "<group>"; };
 		594D2A4E2A5D243600EA231C /* WaveformManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformManager.swift; sourceTree = "<group>"; };
 		59BFFD012A5E47C0007B5EBE /* RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
+		59FAD3EC2AD3704B00425775 /* Recording.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recording.swift; sourceTree = "<group>"; };
+		59FAD3EE2AD3712200425775 /* Pin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pin.swift; sourceTree = "<group>"; };
+		59FAD3F02AD3720500425775 /* Recordings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recordings.swift; sourceTree = "<group>"; };
+		59FAD3F52AD3730300425775 /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59FAD3F42AD372D500425775 /* Defaults in Frameworks */,
 				59D7178B2A7DCFD0005B0C49 /* DSWaveformImage in Frameworks */,
 				59D7178D2A7DCFD0005B0C49 /* DSWaveformImageViews in Frameworks */,
 			);
@@ -65,7 +71,12 @@
 			isa = PBXGroup;
 			children = (
 				594D2A4A2A5D241900EA231C /* Pitchpin-Bridging-Header.h */,
+				59FAD3F52AD3730300425775 /* Defaults.swift */,
+				59FAD3F02AD3720500425775 /* Recordings.swift */,
+				59FAD3EC2AD3704B00425775 /* Recording.swift */,
+				59FAD3EE2AD3712200425775 /* Pin.swift */,
 				027811D328897A5600A4A61D /* Extensions.swift */,
+				59FAD3F72AD3731600425775 /* Views */,
 				59C6179E2A650177003F8100 /* Waveform */,
 				59C6179D2A65016C003F8100 /* Audio */,
 				027811B72889753F00A4A61D /* Pitchpin */,
@@ -85,16 +96,9 @@
 		027811B72889753F00A4A61D /* Pitchpin */ = {
 			isa = PBXGroup;
 			children = (
-				59BFFD012A5E47C0007B5EBE /* RoundedCorner.swift */,
-				027811BF2889753F00A4A61D /* ContentView.swift */,
-				027811DA28897AD200A4A61D /* RecordingsList.swift */,
-				027811DC2889932100A4A61D /* PlayerBar.swift */,
-				0236343D288A96D3008A0944 /* RecorderBar.swift */,
 				027811B82889753F00A4A61D /* PitchpinApp.swift */,
-				027811DE28899C9100A4A61D /* CoreData */,
 				027811C12889754300A4A61D /* Assets.xcassets */,
 				027811C32889754300A4A61D /* Pitchpin.entitlements */,
-				027811BC2889753F00A4A61D /* VoiceRecTest.xcdatamodeld */,
 				027811C42889754300A4A61D /* Preview Content */,
 			);
 			path = Pitchpin;
@@ -106,14 +110,6 @@
 				027811C52889754300A4A61D /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		027811DE28899C9100A4A61D /* CoreData */ = {
-			isa = PBXGroup;
-			children = (
-				027811BA2889753F00A4A61D /* Persistence.swift */,
-			);
-			path = CoreData;
 			sourceTree = "<group>";
 		};
 		59BFFCFB2A5D2819007B5EBE /* Frameworks */ = {
@@ -142,6 +138,18 @@
 			path = Waveform;
 			sourceTree = "<group>";
 		};
+		59FAD3F72AD3731600425775 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				59BFFD012A5E47C0007B5EBE /* RoundedCorner.swift */,
+				027811BF2889753F00A4A61D /* ContentView.swift */,
+				027811DA28897AD200A4A61D /* RecordingsList.swift */,
+				027811DC2889932100A4A61D /* PlayerBar.swift */,
+				0236343D288A96D3008A0944 /* RecorderBar.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -161,6 +169,7 @@
 			packageProductDependencies = (
 				59D7178A2A7DCFD0005B0C49 /* DSWaveformImage */,
 				59D7178C2A7DCFD0005B0C49 /* DSWaveformImageViews */,
+				59FAD3F32AD372D500425775 /* Defaults */,
 			);
 			productName = VoiceRecTest;
 			productReference = 027811B52889753F00A4A61D /* Pitchpin.app */;
@@ -193,6 +202,7 @@
 			mainGroup = 027811AC2889753F00A4A61D;
 			packageReferences = (
 				59D717892A7DCFD0005B0C49 /* XCRemoteSwiftPackageReference "DSWaveformImage" */,
+				59FAD3F22AD372D500425775 /* XCRemoteSwiftPackageReference "Defaults" */,
 			);
 			productRefGroup = 027811B62889753F00A4A61D /* Products */;
 			projectDirPath = "";
@@ -221,18 +231,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				594D2A4D2A5D241A00EA231C /* SCAudioManager.m in Sources */,
+				59FAD3F12AD3720500425775 /* Recordings.swift in Sources */,
 				027811B92889753F00A4A61D /* PitchpinApp.swift in Sources */,
-				027811BB2889753F00A4A61D /* Persistence.swift in Sources */,
 				027811D928897A9900A4A61D /* AudioPlayer.swift in Sources */,
 				59BFFD022A5E47C0007B5EBE /* RoundedCorner.swift in Sources */,
 				0236343E288A96D3008A0944 /* RecorderBar.swift in Sources */,
 				027811C02889753F00A4A61D /* ContentView.swift in Sources */,
-				027811BE2889753F00A4A61D /* VoiceRecTest.xcdatamodeld in Sources */,
+				59FAD3EF2AD3712200425775 /* Pin.swift in Sources */,
 				027811DD2889932100A4A61D /* PlayerBar.swift in Sources */,
 				027811DB28897AD200A4A61D /* RecordingsList.swift in Sources */,
 				027811D728897A8600A4A61D /* AudioRecorder.swift in Sources */,
 				594D2A4F2A5D243600EA231C /* WaveformManager.swift in Sources */,
+				59FAD3F62AD3730300425775 /* Defaults.swift in Sources */,
 				027811D428897A5600A4A61D /* Extensions.swift in Sources */,
+				59FAD3ED2AD3704B00425775 /* Recording.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -473,6 +485,14 @@
 				minimumVersion = 13.0.2;
 			};
 		};
+		59FAD3F22AD372D500425775 /* XCRemoteSwiftPackageReference "Defaults" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/Defaults.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -486,20 +506,12 @@
 			package = 59D717892A7DCFD0005B0C49 /* XCRemoteSwiftPackageReference "DSWaveformImage" */;
 			productName = DSWaveformImageViews;
 		};
-/* End XCSwiftPackageProductDependency section */
-
-/* Begin XCVersionGroup section */
-		027811BC2889753F00A4A61D /* VoiceRecTest.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				027811BD2889753F00A4A61D /* VoiceRecTest.xcdatamodel */,
-			);
-			currentVersion = 027811BD2889753F00A4A61D /* VoiceRecTest.xcdatamodel */;
-			path = VoiceRecTest.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
+		59FAD3F32AD372D500425775 /* Defaults */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 59FAD3F22AD372D500425775 /* XCRemoteSwiftPackageReference "Defaults" */;
+			productName = Defaults;
 		};
-/* End XCVersionGroup section */
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 027811AD2889753F00A4A61D /* Project object */;
 }
