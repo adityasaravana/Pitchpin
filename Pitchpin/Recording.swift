@@ -14,4 +14,8 @@ struct Recording: Codable, Defaults.Serializable {
     var created: Date
     var data: Data?
     var pins: [Pin] = []
+    
+    func stamp() {
+        
+    }
 }

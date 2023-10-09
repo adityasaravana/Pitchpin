@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0236343E288A96D3008A0944 /* RecorderBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0236343D288A96D3008A0944 /* RecorderBar.swift */; };
-		027811B92889753F00A4A61D /* PitchpinApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027811B82889753F00A4A61D /* PitchpinApp.swift */; };
+		027811B92889753F00A4A61D /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027811B82889753F00A4A61D /* App.swift */; };
 		027811C02889753F00A4A61D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027811BF2889753F00A4A61D /* ContentView.swift */; };
 		027811C22889754300A4A61D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 027811C12889754300A4A61D /* Assets.xcassets */; };
 		027811C62889754300A4A61D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 027811C52889754300A4A61D /* Preview Assets.xcassets */; };
@@ -32,7 +32,7 @@
 /* Begin PBXFileReference section */
 		0236343D288A96D3008A0944 /* RecorderBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderBar.swift; sourceTree = "<group>"; };
 		027811B52889753F00A4A61D /* Pitchpin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pitchpin.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		027811B82889753F00A4A61D /* PitchpinApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitchpinApp.swift; sourceTree = "<group>"; };
+		027811B82889753F00A4A61D /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		027811BF2889753F00A4A61D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		027811C12889754300A4A61D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		027811C32889754300A4A61D /* Pitchpin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pitchpin.entitlements; sourceTree = "<group>"; };
@@ -72,16 +72,14 @@
 			children = (
 				594D2A4A2A5D241900EA231C /* Pitchpin-Bridging-Header.h */,
 				59FAD3F52AD3730300425775 /* Defaults.swift */,
+				027811D328897A5600A4A61D /* Extensions.swift */,
 				59FAD3F02AD3720500425775 /* Recordings.swift */,
 				59FAD3EC2AD3704B00425775 /* Recording.swift */,
 				59FAD3EE2AD3712200425775 /* Pin.swift */,
-				027811D328897A5600A4A61D /* Extensions.swift */,
 				59FAD3F72AD3731600425775 /* Views */,
-				59C6179E2A650177003F8100 /* Waveform */,
 				59C6179D2A65016C003F8100 /* Audio */,
 				027811B72889753F00A4A61D /* Pitchpin */,
 				027811B62889753F00A4A61D /* Products */,
-				59BFFCFB2A5D2819007B5EBE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -96,7 +94,7 @@
 		027811B72889753F00A4A61D /* Pitchpin */ = {
 			isa = PBXGroup;
 			children = (
-				027811B82889753F00A4A61D /* PitchpinApp.swift */,
+				027811B82889753F00A4A61D /* App.swift */,
 				027811C12889754300A4A61D /* Assets.xcassets */,
 				027811C32889754300A4A61D /* Pitchpin.entitlements */,
 				027811C42889754300A4A61D /* Preview Content */,
@@ -110,13 +108,6 @@
 				027811C52889754300A4A61D /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		59BFFCFB2A5D2819007B5EBE /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		59C6179D2A65016C003F8100 /* Audio */ = {
@@ -141,6 +132,7 @@
 		59FAD3F72AD3731600425775 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				59C6179E2A650177003F8100 /* Waveform */,
 				59BFFD012A5E47C0007B5EBE /* RoundedCorner.swift */,
 				027811BF2889753F00A4A61D /* ContentView.swift */,
 				027811DA28897AD200A4A61D /* RecordingsList.swift */,
@@ -232,7 +224,7 @@
 			files = (
 				594D2A4D2A5D241A00EA231C /* SCAudioManager.m in Sources */,
 				59FAD3F12AD3720500425775 /* Recordings.swift in Sources */,
-				027811B92889753F00A4A61D /* PitchpinApp.swift in Sources */,
+				027811B92889753F00A4A61D /* App.swift in Sources */,
 				027811D928897A9900A4A61D /* AudioPlayer.swift in Sources */,
 				59BFFD022A5E47C0007B5EBE /* RoundedCorner.swift in Sources */,
 				0236343E288A96D3008A0944 /* RecorderBar.swift in Sources */,

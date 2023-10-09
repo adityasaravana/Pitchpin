@@ -57,7 +57,7 @@ struct PlayerBar: View {
                     }
                     
                     // Recording name
-                    Text(currentlyPlaying.name ?? "Recording")
+                    Text(currentlyPlaying.name)
                         .fontWeight(.semibold)
                         .lineLimit(1)
                         .foregroundColor(.white)

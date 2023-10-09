@@ -13,6 +13,23 @@ struct RecordingsList: View {
     @ObservedObject var audioPlayer: AudioPlayer
     @EnvironmentObject var recordings: Recordings
     
+    enum SortOption {
+        case name, createdLatestToFirst, createdFirstToLatest
+    }
+    
+    @State private var sortOption: SortOption = .createdLatestToFirst
+    
+    var sortedTasks: [Recording] {
+        switch sortOption {
+        case .name:
+            return recordings.recordings.sorted { $0.name < $1.name }
+        case .createdLatestToFirst:
+            return recordings.recordings.sorted { $0.created < $1.created }
+        case .createdFirstToLatest:
+            return recordings.recordings.sorted { $1.created < $0.created }
+        }
+    }
+    
     var body: some View {
         NavigationView {
             List {
@@ -23,6 +40,9 @@ struct RecordingsList: View {
             }
             .navigationTitle("Recordings")
             .toolbar {
+//                ToolbarItem(placement: .topBarLeading) {
+//                    List Sorter here
+//                }
                 EditButton()
             }
         }
@@ -44,7 +64,7 @@ struct RecordingRow: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text(recording.name ?? "Recording")
+                Text(recording.name)
                     .fontWeight(isPlayingThisRecording ? .bold : .regular)
                 Group {
                     if let recordingData = recording.data, let duration = getDuration(of: recordingData) {
@@ -71,7 +91,7 @@ struct RecordingRow: View {
         do {
             return try AVAudioPlayer(data: recordingData).duration
         } catch {
-            print("Failed to get the duration for recording on the list: Recording Name - \(recording.name ?? "")")
+            print("Failed to get the duration for recording on the list: Recording Name - \(recording.name)")
             return nil
         }
     }

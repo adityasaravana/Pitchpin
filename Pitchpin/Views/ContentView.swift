@@ -13,16 +13,12 @@ struct ContentView: View {
     @ObservedObject var audioPlayer = AudioPlayer()
     @ObservedObject var audioRecorder = AudioRecorder()
     
-    
-    
     var body: some View {
-            RecordingsList(audioPlayer: audioPlayer)
+        RecordingsList(audioPlayer: audioPlayer)
             .environmentObject(recordings)
-                .safeAreaInset(edge: .bottom) {
-                    bottomBar
-                }
-                
-        
+            .safeAreaInset(edge: .bottom) {
+                bottomBar
+            }
     }
     
     var bottomBar: some View {
@@ -30,11 +26,12 @@ struct ContentView: View {
             PlayerBar(audioPlayer: audioPlayer)
             RecorderBar(audioPlayer: audioPlayer)
         }
-        .shadow(radius: 40)
-        .background(
+        
+        .background (
             Color.black
                 .opacity(0.8)
-//                .cornerRadius(30, corners: [.topLeft, .topRight]).edgesIgnoringSafeArea(.all)
+                .cornerRadius(20, corners: [.topLeft, .topRight])
+                .edgesIgnoringSafeArea(.all)
         )
         
     }
