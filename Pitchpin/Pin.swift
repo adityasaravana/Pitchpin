@@ -10,5 +10,6 @@ import Defaults
 
 struct Pin: Codable, Defaults.Serializable {
     var notes: String
-    var timestamp: TimeInterval
+    var timestamp: TimeInterval?
+    var time = Date()
 }
