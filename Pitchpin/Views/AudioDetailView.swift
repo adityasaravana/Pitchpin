@@ -11,7 +11,13 @@ struct AudioDetailView: View {
     var recording: Recording
     var body: some View {
         VStack {
+            Text(recording.name)
+                .bold()
+                .font(.title)
             
+            HStack {
+                
+            }
         }
     }
 }
