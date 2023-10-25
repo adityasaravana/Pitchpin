@@ -8,6 +8,7 @@
 import SwiftUI
 import CoreData
 
+
 struct ContentView: View {
     @EnvironmentObject var recordings: Recordings
     @ObservedObject var audioPlayer = AudioPlayer()
