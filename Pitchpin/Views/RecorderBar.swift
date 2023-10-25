@@ -50,16 +50,7 @@ struct RecorderBar: View {
             
             GeometryReader { geometry in
                 ZStack {
-                    HStack {
-                        Button {
-                            
-                        } label: {
-                            ZStack {
-                                Image(systemName: "pin.circle.fill").font(.system(size: 50)).foregroundColor(.yellow)
-                            }
-                        }.padding()
-                        Spacer()
-                    }
+                    
                     let minDimension = min(geometry.size.width, geometry.size.height)
                     
                     Button {
@@ -75,11 +66,20 @@ struct RecorderBar: View {
                             .fill(.red)
                     }
                     
-                    
                     Circle()
                         .strokeBorder(lineWidth: minDimension * 0.05)
                         .foregroundColor(.white)
                     
+                    HStack {
+                        Button {
+                            audioRecorder.pin()
+                        } label: {
+                            ZStack {
+                                Image(systemName: "pin.circle.fill").font(.system(size: 50)).foregroundColor(.yellow)
+                            }
+                        }.padding()
+                        Spacer()
+                    }
                 }
             }
         }

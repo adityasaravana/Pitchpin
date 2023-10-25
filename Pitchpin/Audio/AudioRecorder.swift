@@ -21,8 +21,21 @@ class AudioRecorder: NSObject,ObservableObject {
     @Published private var recordingName = "Recording1"
     @Published private var recordingDate = Date()
     @Published private var recordingURL: URL?
+    @Published private var timestamps: [TimeInterval] = []
     
     @Published var isRecording = false
+    
+    // MARK: - Pin
+    
+    func pin() {
+        Task {
+            if let currentTime: TimeInterval = audioRecorder?.currentTime {
+                // Do something with currentTime
+                print("Current time of recording: \(currentTime) seconds")
+                timestamps.append(currentTime)
+            }
+        }
+    }
     
     // MARK: - Start Recording
     
@@ -96,7 +109,16 @@ class AudioRecorder: NSObject,ObservableObject {
     // MARK: - Saving Recordings --------------------------------------
     
     func saveRecording(recordingData: Data) {
-        let newRecording = Recording(name: recordingName, created: recordingDate, data: recordingData)
+        var pins: [Pin] = []
+        
+        for timestamp in timestamps {
+            pins.append(.init(notes: "", timestamp: timestamp))
+            print("!!!!!!!!!!!!!")
+            print(timestamp)
+            print("!!!!!!!!!!!!!")
+        }
+        
+        let newRecording = Recording(name: recordingName, created: recordingDate, data: recordingData, pins: pins)
         recordings.recordings.append(newRecording)
     }
     

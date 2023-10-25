@@ -13,5 +13,5 @@ struct Recording: Codable, Defaults.Serializable {
     var name: String
     var created: Date
     var data: Data?
-    var pins: [Pin] = []
+    var pins: [Pin]
 }

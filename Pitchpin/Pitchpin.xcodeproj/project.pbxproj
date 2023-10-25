@@ -17,6 +17,7 @@
 		027811D928897A9900A4A61D /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027811D828897A9900A4A61D /* AudioPlayer.swift */; };
 		027811DB28897AD200A4A61D /* RecordingsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027811DA28897AD200A4A61D /* RecordingsList.swift */; };
 		027811DD2889932100A4A61D /* PlayerBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027811DC2889932100A4A61D /* PlayerBar.swift */; };
+		590B69332AE8C02B004BE51E /* AudioDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590B69322AE8C02B004BE51E /* AudioDetailView.swift */; };
 		594D2A4D2A5D241A00EA231C /* SCAudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 594D2A4B2A5D241900EA231C /* SCAudioManager.m */; };
 		594D2A4F2A5D243600EA231C /* WaveformManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594D2A4E2A5D243600EA231C /* WaveformManager.swift */; };
 		59BFFD022A5E47C0007B5EBE /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BFFD012A5E47C0007B5EBE /* RoundedCorner.swift */; };
@@ -42,6 +43,7 @@
 		027811D828897A9900A4A61D /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		027811DA28897AD200A4A61D /* RecordingsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingsList.swift; sourceTree = "<group>"; };
 		027811DC2889932100A4A61D /* PlayerBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerBar.swift; sourceTree = "<group>"; };
+		590B69322AE8C02B004BE51E /* AudioDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioDetailView.swift; sourceTree = "<group>"; };
 		594D2A4A2A5D241900EA231C /* Pitchpin-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Pitchpin-Bridging-Header.h"; sourceTree = "<group>"; };
 		594D2A4B2A5D241900EA231C /* SCAudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCAudioManager.m; sourceTree = "<group>"; };
 		594D2A4C2A5D241A00EA231C /* SCAudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCAudioManager.h; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				027811DA28897AD200A4A61D /* RecordingsList.swift */,
 				027811DC2889932100A4A61D /* PlayerBar.swift */,
 				0236343D288A96D3008A0944 /* RecorderBar.swift */,
+				590B69322AE8C02B004BE51E /* AudioDetailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -222,6 +225,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				590B69332AE8C02B004BE51E /* AudioDetailView.swift in Sources */,
 				594D2A4D2A5D241A00EA231C /* SCAudioManager.m in Sources */,
 				59FAD3F12AD3720500425775 /* Recordings.swift in Sources */,
 				027811B92889753F00A4A61D /* App.swift in Sources */,
