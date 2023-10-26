@@ -72,12 +72,18 @@ struct RecorderBar: View {
                     
                     HStack {
                         Button {
-                            audioRecorder.pin()
+                            if audioRecorder.isRecording {
+                                audioRecorder.pin()
+                            }
                         } label: {
                             ZStack {
-                                Image(systemName: "pin.circle.fill").font(.system(size: 50)).foregroundColor(.yellow)
+                                
+                                    Image(systemName: "pin.fill").font(.system(size: 30))
                             }
-                        }.padding()
+                        }
+                        .buttonStyle(PinButtonStyle())
+                        .padding()
+                        
                         Spacer()
                     }
                 }
@@ -202,5 +208,17 @@ struct RecordButtonShape: Shape {
         path.addLine(to: rightTop)
         
         return path
+    }
+}
+
+struct PinButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .padding()
+            .background(configuration.isPressed ? .red : .yellow)
+            .foregroundColor(.white)
+            .clipShape(Circle())
+            .scaleEffect(configuration.isPressed ? 1.1 : 1)
+            .animation(.easeInOut(duration: 0.2), value: configuration.isPressed)
     }
 }

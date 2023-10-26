@@ -19,26 +19,6 @@ struct PlayerBar: View {
     var body: some View {
         if let player = audioPlayer.audioPlayer, let currentlyPlaying = audioPlayer.currentlyPlaying {
             VStack {
-                
-                // Slider
-                Slider(value: $sliderValue, in: 0...player.duration) { dragging in
-                    print("Editing the slider: \(dragging)")
-                    isDragging = dragging
-                    if !dragging {
-                        player.currentTime = sliderValue
-                    }
-                }
-                .tint(.primary)
-                
-                // Time passed & Time remaining
-                HStack {
-                    Text(DateComponentsFormatter.positional.string(from: player.currentTime) ?? "0:00")
-                    Spacer()
-                    Text("-\(DateComponentsFormatter.positional.string(from: (player.duration - player.currentTime) ) ?? "0:00")")
-                }
-                .font(.caption)
-                .foregroundColor(.white)
-                
                 HStack(spacing: 15) {
                     // Play/Pause Button
                     Button {
@@ -77,6 +57,26 @@ struct PlayerBar: View {
                     
                 }
                 .padding(.top, 10)
+                // Slider
+                Slider(value: $sliderValue, in: 0...player.duration) { dragging in
+                    print("Editing the slider: \(dragging)")
+                    isDragging = dragging
+                    if !dragging {
+                        player.currentTime = sliderValue
+                    }
+                }
+                .tint(.primary)
+                
+                // Time passed & Time remaining
+                HStack {
+                    Text(DateComponentsFormatter.positional.string(from: player.currentTime) ?? "0:00")
+                    Spacer()
+                    Text("-\(DateComponentsFormatter.positional.string(from: (player.duration - player.currentTime) ) ?? "0:00")")
+                }
+                .font(.caption)
+                .foregroundColor(.white)
+                
+                
             }
             .padding()
             .foregroundColor(.primary)

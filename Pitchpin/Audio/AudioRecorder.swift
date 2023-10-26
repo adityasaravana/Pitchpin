@@ -40,6 +40,8 @@ class AudioRecorder: NSObject,ObservableObject {
     // MARK: - Start Recording
     
     func startRecording() {
+        timestamps.removeAll()
+        
         let recordingSession = AVAudioSession.sharedInstance()
         
         do {
