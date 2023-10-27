@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct AudioDetailView: View {
-    @ObservedObject var audioPlayer: AudioPlayer
+    @State var audioPlayer = AudioPlayer()
     @State var sliderValue: Double = 0.0
     @State private var isDragging = false
-    let timer = Timer
+    var timer = Timer
         .publish(every: 0.5, on: .main, in: .common)
         .autoconnect()
     
@@ -36,8 +36,9 @@ struct AudioDetailView: View {
         case playback
     }
     
-    @State var viewState: ViewState = .waitingForPlayStart
+    @State var viewState: ViewState = .playback
     @State var editingName = false
+    
     var body: some View {
         ZStack {
             Color.pitchpinGray.edgesIgnoringSafeArea(.all)
@@ -79,25 +80,13 @@ struct AudioDetailView: View {
                 Spacer()
                 
                 
-                if viewState == .playback {
-                    HStack {
-                        //                    if let currentTime = audioPlayer.audioPlayer?.currentTime {
-                        //                        Text(DateComponentsFormatter.positional.string(from: currentTime) ?? "0:00")
-                        //                            .bold()
-                        //                            .foregroundColor(.secondary)
-                        //                    }
-                        PlayerBar(audioPlayer: audioPlayer).overlay(
-                            PinDisplay(timestamps: recording.pins, totalDuration: recording.duration ?? 0)
-                                .frame(height: 20)
-                                .clipped()
-                        )
-                        //                    if let duration = recording.duration {
-                        //                        Text(DateComponentsFormatter.positional.string(from: duration) ?? "0:00")
-                        //                            .bold()
-                        //                            .foregroundColor(.secondary)
-                        //                    }
-                    }
-                }
+                       
+                            PlayerBar(audioPlayer: audioPlayer).overlay(
+                                PinDisplay(timestamps: recording.pins, totalDuration: recording.duration ?? 0)
+                            )
+                                      
+                    
+                
                 
                 HStack {
                     if viewState == .playback {
@@ -126,6 +115,8 @@ struct AudioDetailView: View {
                             if audioPlayer.isPlaying {
                                 // Pause
                                 audioPlayer.pausePlayback()
+                                
+                                
                             } else {
                                 // Play
                                 audioPlayer.resumePlayback()
@@ -175,7 +166,11 @@ struct AudioDetailView: View {
                 
             }
             .padding()
-        }.onDisappear {
+        }
+        .onAppear {
+            audioPlayer.initialize(recording: recording)
+        }
+        .onDisappear {
             if viewState == .playback {
                 audioPlayer.pausePlayback()
             }
@@ -194,12 +189,20 @@ struct PinDisplay: View {
         GeometryReader { geometry in
             ZStack {
                 ForEach(timestamps, id: \.self) { timestamp in
-                    Rectangle()
-                        .frame(width: 2, height: 10)
-                        .foregroundColor(.blue)
-                        .offset(x: CGFloat(timestamp.timestamp / totalDuration) * geometry.size.width, y: 0)
+                    Image(systemName: "pin.fill")
+                        .frame(width: 5, height: 15)
+                        .foregroundColor(.yellow)
+                        .offset(x: CGFloat(timestamp.timestamp / totalDuration) * geometry.size.width, y: 12.5)
                 }
             }
         }
+    }
+}
+
+#Preview {
+    VStack {
+        Spacer()
+        PinDisplay(timestamps: [.init(notes: "", timestamp: 12)], totalDuration: 14)
+        Spacer()
     }
 }

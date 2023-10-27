@@ -12,7 +12,7 @@ struct PitchpinApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView().environmentObject(Recordings.shared)
-            //AudioDetailView(audioPlayer: AudioPlayer(), recording: Recordings.shared.recordings.first!)
+            //AudioDetailView(audioPlayer: AudioPlayer(), recording: .constant(Recordings.shared.recordings.first!))
         }
     }
 }

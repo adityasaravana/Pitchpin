@@ -17,7 +17,7 @@ struct PlayerBar: View {
         .autoconnect()
     
     var body: some View {
-        if let player = audioPlayer.audioPlayer, let currentlyPlaying = audioPlayer.currentlyPlaying {
+        if let player = audioPlayer.audioPlayer {
             VStack {
 //                HStack(spacing: 15) {
 //                    // Play/Pause Button
@@ -87,7 +87,7 @@ struct PlayerBar: View {
                 guard let player = audioPlayer.audioPlayer, !isDragging else { return }
                 sliderValue = player.currentTime
             }
-            .transition(.scale(scale: 0, anchor: .bottom))
+//            .transition(.scale(scale: 0, anchor: .bottom))
         }
     }
 }

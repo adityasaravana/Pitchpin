@@ -22,14 +22,13 @@ class AudioPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
     @Published var isPlaying = false
     @Published var state: AudioPlayerState = .notPlaying
     
-    
+    var recording: Recording?
     
     var audioPlayer: AVAudioPlayer?
     
-    func startPlayback(recording: Recording) {
+    func initialize(recording: Recording) {
         if let recordingData = recording.data {
             let playbackSession = AVAudioSession.sharedInstance()
-            
             
             do {
                 try playbackSession.setCategory(AVAudioSession.Category.playback, mode: AVAudioSession.Mode.spokenAudio)
@@ -42,24 +41,20 @@ class AudioPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
             do {
                 audioPlayer = try AVAudioPlayer(data: recordingData)
                 audioPlayer?.delegate = self
-                audioPlayer?.play()
-                isPlaying = true
-                state = .playing
-                print("Play Recording - Playing")
-                withAnimation(.spring()) {
-                    currentlyPlaying = recording
-                }
+                
             } catch {
-                print("Play Recording - Playback failed: - \(error)")
-                withAnimation {
-                    currentlyPlaying = nil
-                }
+                print("init Recording - docatch failed: - \(error)")
             }
-        } else {
-            print("Play Recording - Could not get the recording data")
-            withAnimation {
-                currentlyPlaying = nil
-            }
+        }
+    }
+    
+    func startPlayback(recording: Recording) {
+        audioPlayer?.play()
+        isPlaying = true
+        state = .playing
+        print("Play Recording - Playing")
+        withAnimation(.spring()) {
+            currentlyPlaying = recording
         }
     }
     
