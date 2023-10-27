@@ -12,7 +12,7 @@ import AVFoundation
 struct RecordingsList: View {
     @ObservedObject var audioPlayer: AudioPlayer
     @EnvironmentObject var recordings: Recordings
-    
+    @State var search = ""
     enum SortOption {
         case name, createdLatestToFirst, createdFirstToLatest
     }

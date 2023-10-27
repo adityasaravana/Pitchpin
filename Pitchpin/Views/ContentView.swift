@@ -23,7 +23,6 @@ struct ContentView: View {
     
     var bottomBar: some View {
         VStack {
-//            PlayerBar(audioPlayer: audioPlayer)
             RecorderBar(audioPlayer: audioPlayer)
         }
         

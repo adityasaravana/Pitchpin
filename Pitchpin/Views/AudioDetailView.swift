@@ -37,17 +37,43 @@ struct AudioDetailView: View {
     }
     
     @State var viewState: ViewState = .waitingForPlayStart
-    
+    @State var editingName = false
     var body: some View {
         ZStack {
             Color.pitchpinGray.edgesIgnoringSafeArea(.all)
             
             VStack {
                 HStack {
-                    Text(recording.name)
-                        .bold()
-                        .font(.title)
-                        .foregroundStyle(.white)
+                    if !editingName {
+                        Text(recording.name)
+                            .bold()
+                            .font(.title)
+                            .foregroundStyle(.white)
+                            .lineLimit(1)
+                    } else {
+                        TextField("Name", text: $recording.name)
+                            .font(.title)
+                            .foregroundStyle(.white)
+                            .lineLimit(1)
+                    }
+                    
+                    if !editingName {
+                        Spacer()
+                    }
+                    
+                    if !editingName {
+                        Button {
+                            editingName = true
+                        } label: {
+                            Image(systemName: "square.and.pencil").font(.title)
+                        }
+                    } else {
+                        Button {
+                            editingName = false
+                        } label: {
+                            Image(systemName: "checkmark.square").font(.title)
+                        }
+                    }
                 }.padding()
                 
                 Spacer()
