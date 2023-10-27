@@ -8,7 +8,24 @@
 import Foundation
 import Defaults
 
-struct Pin: Codable, Defaults.Serializable {
+class Pin: Codable, Defaults.Serializable {
     var notes: String
     var timestamp: TimeInterval
+    
+    init(notes: String, timestamp: TimeInterval) {
+        self.notes = notes
+        self.timestamp = timestamp
+    }
+}
+
+extension Pin: Equatable {
+    static func == (lhs: Pin, rhs: Pin) -> Bool {
+        lhs === rhs
+    }
+}
+
+extension Pin: Hashable, Identifiable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
 }

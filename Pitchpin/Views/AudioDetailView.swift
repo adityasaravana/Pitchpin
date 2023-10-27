@@ -86,7 +86,11 @@ struct AudioDetailView: View {
                         //                            .bold()
                         //                            .foregroundColor(.secondary)
                         //                    }
-                        PlayerBar(audioPlayer: audioPlayer)
+                        PlayerBar(audioPlayer: audioPlayer).overlay(
+                            PinDisplay(timestamps: recording.pins, totalDuration: recording.duration ?? 0)
+                                .frame(height: 20)
+                                .clipped()
+                        )
                         //                    if let duration = recording.duration {
                         //                        Text(DateComponentsFormatter.positional.string(from: duration) ?? "0:00")
                         //                            .bold()
@@ -181,4 +185,21 @@ struct AudioDetailView: View {
 
 #Preview {
     AudioDetailView(audioPlayer: AudioPlayer(), recording: .constant(.init(name: "test", created: Date(), pins: [.init(notes: "", timestamp: 0.71333)])))
+}
+
+struct PinDisplay: View {
+    let timestamps: [Pin]
+    let totalDuration: TimeInterval
+    var body: some View {
+        GeometryReader { geometry in
+            ZStack {
+                ForEach(timestamps, id: \.self) { timestamp in
+                    Rectangle()
+                        .frame(width: 2, height: 10)
+                        .foregroundColor(.blue)
+                        .offset(x: CGFloat(timestamp.timestamp / totalDuration) * geometry.size.width, y: 0)
+                }
+            }
+        }
+    }
 }

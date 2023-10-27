@@ -28,13 +28,13 @@ class AudioRecorder: NSObject,ObservableObject {
     // MARK: - Pin
     
     func pin() {
-        Task {
+       
             if let currentTime: TimeInterval = audioRecorder?.currentTime {
                 // Do something with currentTime
                 print("Current time of recording: \(currentTime) seconds")
                 timestamps.append(currentTime)
             }
-        }
+        
     }
     
     // MARK: - Start Recording
