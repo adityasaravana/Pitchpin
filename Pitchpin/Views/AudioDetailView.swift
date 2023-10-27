@@ -104,8 +104,7 @@ struct AudioDetailView: View {
                         }
                     }
                     
-                    switch viewState {
-                    case .waitingForPlayStart:
+                    if audioPlayer.state == .notPlaying || audioPlayer.state == .finished {
                         Button {
                             audioPlayer.startPlayback(recording: recording)
                             withAnimation {
@@ -118,7 +117,7 @@ struct AudioDetailView: View {
                                 .padding(30)
                                 .background(Color.accentColor.clipShape(Circle()))
                         }
-                    case .playback:
+                    } else if audioPlayer.state == .paused || audioPlayer.state == .playing {
                         Button {
                             if audioPlayer.isPlaying {
                                 // Pause

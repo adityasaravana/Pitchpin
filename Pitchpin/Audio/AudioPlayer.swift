@@ -10,10 +10,19 @@ import SwiftUI
 import Combine
 import AVFoundation
 
-class AudioPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
+enum AudioPlayerState {
+    case notPlaying
+    case playing
+    case paused
+    case finished
+}
 
+class AudioPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
     @Published var currentlyPlaying: Recording?
     @Published var isPlaying = false
+    @Published var state: AudioPlayerState = .notPlaying
+    
+    
     
     var audioPlayer: AVAudioPlayer?
     
@@ -35,6 +44,7 @@ class AudioPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
                 audioPlayer?.delegate = self
                 audioPlayer?.play()
                 isPlaying = true
+                state = .playing
                 print("Play Recording - Playing")
                 withAnimation(.spring()) {
                     currentlyPlaying = recording
@@ -56,12 +66,14 @@ class AudioPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
     func pausePlayback() {
         audioPlayer?.pause()
         isPlaying = false
+        state = .paused
         print("Play Recording - Paused")
     }
     
     func resumePlayback() {
         audioPlayer?.play()
         isPlaying = true
+        state = .playing
         print("Play Recording - Resumed")
     }
     
@@ -69,6 +81,7 @@ class AudioPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
         if audioPlayer != nil {
             audioPlayer?.stop()
             isPlaying = false
+            state = .finished
             print("Play Recording - Stopped")
             withAnimation(.spring()) {
                 self.currentlyPlaying = nil
@@ -80,6 +93,7 @@ class AudioPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
     
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         if flag {
+            state = .finished
 //            isPlaying = false
 //            print("Play Recording - Recoring finished playing")
 //            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {

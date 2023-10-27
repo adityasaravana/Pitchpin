@@ -31,10 +31,15 @@ struct RecordingsList: View {
     }
     
     var body: some View {
+        
         NavigationView {
             List {
+                if recordings.recordings.isEmpty {
+                    Text("↓ Why not record something special? ↓")
+                }
                 ForEach($recordings.recordings, id: \.id) { recording in
                     RecordingRow(audioPlayer: audioPlayer, recording: recording)
+                    
                 }
                 .onDelete(perform: delete)
             }
