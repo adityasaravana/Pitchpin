@@ -126,8 +126,7 @@ fileprivate struct PreviewView: View {
             RecorderBar(audioPlayer: AudioPlayer())
                 .shadow(radius: 40)
                 .background(
-                    Color.black
-                        .opacity(0.8)
+                    .pitchpinGray
                     //                .cornerRadius(30, corners: [.topLeft, .topRight]).edgesIgnoringSafeArea(.all)
                 )
         }

@@ -33,7 +33,7 @@ struct RecordingsList: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(recordings.recordings, id: \.id) { recording in
+                ForEach($recordings.recordings, id: \.id) { recording in
                     RecordingRow(audioPlayer: audioPlayer, recording: recording)
                 }
                 .onDelete(perform: delete)
@@ -56,7 +56,7 @@ struct RecordingsList: View {
 struct RecordingRow: View {
     @State var showDetailView = false
     @ObservedObject var audioPlayer: AudioPlayer
-    var recording: Recording
+    @Binding var recording: Recording
     
     var isPlayingThisRecording: Bool {
         audioPlayer.currentlyPlaying?.id == recording.id
@@ -64,14 +64,14 @@ struct RecordingRow: View {
     
     var body: some View {
         HStack {
-            Button {
-                audioPlayer.startPlayback(recording: recording)
-            } label: {
-                Image(systemName: "play.circle.fill")
-                    .imageScale(.large)
-                    .symbolRenderingMode(.palette)
-                    .foregroundStyle(.primary, .tertiary)
-            }
+//            Button {
+//                audioPlayer.startPlayback(recording: recording)
+//            } label: {
+//                Image(systemName: "play.circle.fill")
+//                    .imageScale(.large)
+//                    .symbolRenderingMode(.palette)
+//                    .foregroundStyle(.primary, .tertiary)
+//            }
             VStack(alignment: .leading) {
                 Text(recording.name)
                     .fontWeight(isPlayingThisRecording ? .bold : .regular)
@@ -91,11 +91,11 @@ struct RecordingRow: View {
                     .foregroundColor(.gray)
             }
             .sheet(isPresented: $showDetailView) {
-                AudioDetailView(audioPlayer: audioPlayer, recording: recording)
+                AudioDetailView(audioPlayer: audioPlayer, recording: $recording)
             }
             
         }
-        .tint(isPlayingThisRecording ? .green : .blue)
+//        .tint(isPlayingThisRecording ? .green : .blue)
     }
     
     func getDuration(of recordingData: Data) -> TimeInterval? {

@@ -23,13 +23,12 @@ struct ContentView: View {
     
     var bottomBar: some View {
         VStack {
-            PlayerBar(audioPlayer: audioPlayer)
+//            PlayerBar(audioPlayer: audioPlayer)
             RecorderBar(audioPlayer: audioPlayer)
         }
         
         .background (
-            Color.black
-                .opacity(0.8)
+            Color.pitchpinGray
                 .cornerRadius(20, corners: [.topLeft, .topRight])
                 .edgesIgnoringSafeArea(.all)
         )

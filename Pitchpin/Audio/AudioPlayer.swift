@@ -80,13 +80,13 @@ class AudioPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
     
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         if flag {
-            isPlaying = false
-            print("Play Recording - Recoring finished playing")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                withAnimation(.spring()) {
-                    self.currentlyPlaying = nil
-                }
-            }
+//            isPlaying = false
+//            print("Play Recording - Recoring finished playing")
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+//                withAnimation(.spring()) {
+//                    self.currentlyPlaying = nil
+//                }
+//            }
         }
     }
     

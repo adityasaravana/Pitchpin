@@ -14,4 +14,21 @@ struct Recording: Codable, Defaults.Serializable {
     var created: Date
     var data: Data?
     var pins: [Pin]
+    
+    var duration: TimeInterval? {
+        if let audio = self.data {
+            return getDuration(of: audio)
+        } else {
+            return nil
+        }
+    }
+    
+    func getDuration(of recordingData: Data) -> TimeInterval? {
+        do {
+            return try AVAudioPlayer(data: recordingData).duration
+        } catch {
+            print("Failed to get the duration for recording on the list: Recording Name - \(self.name)")
+            return nil
+        }
+    }
 }

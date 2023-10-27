@@ -11,99 +11,149 @@ struct AudioDetailView: View {
     @ObservedObject var audioPlayer: AudioPlayer
     @State var sliderValue: Double = 0.0
     @State private var isDragging = false
-    
     let timer = Timer
         .publish(every: 0.5, on: .main, in: .common)
         .autoconnect()
     
-    var recording: Recording
+    var isPlayingThisRecording: Bool {
+        audioPlayer.currentlyPlaying?.id == recording.id
+    }
+    
+    var playing: Bool {
+        if audioPlayer.isPlaying {
+            // Pause
+            return true
+        } else {
+            // Play
+            return false
+        }
+    }
+    
+    @Binding var recording: Recording
+    
+    enum ViewState {
+        case waitingForPlayStart
+        case playback
+    }
+    
+    @State var viewState: ViewState = .waitingForPlayStart
     
     var body: some View {
-        VStack {
-            Text(recording.name)
-                .bold()
-                .font(.title)
+        ZStack {
+            Color.pitchpinGray.edgesIgnoringSafeArea(.all)
             
-            HStack {
-                if let player = audioPlayer.audioPlayer, let currentlyPlaying = audioPlayer.currentlyPlaying {
-                    VStack {
-                        
-                        // Slider
-                        Slider(value: $sliderValue, in: 0...player.duration) { dragging in
-                            print("Editing the slider: \(dragging)")
-                            isDragging = dragging
-                            if !dragging {
-                                player.currentTime = sliderValue
+            VStack {
+                HStack {
+                    Text(recording.name)
+                        .bold()
+                        .font(.title)
+                        .foregroundStyle(.white)
+                }.padding()
+                
+                Spacer()
+                
+                
+                if viewState == .playback {
+                    HStack {
+                        //                    if let currentTime = audioPlayer.audioPlayer?.currentTime {
+                        //                        Text(DateComponentsFormatter.positional.string(from: currentTime) ?? "0:00")
+                        //                            .bold()
+                        //                            .foregroundColor(.secondary)
+                        //                    }
+                        PlayerBar(audioPlayer: audioPlayer)
+                        //                    if let duration = recording.duration {
+                        //                        Text(DateComponentsFormatter.positional.string(from: duration) ?? "0:00")
+                        //                            .bold()
+                        //                            .foregroundColor(.secondary)
+                        //                    }
+                    }
+                }
+                
+                HStack {
+                    if viewState == .playback {
+                        Button {
+                            audioPlayer.audioPlayer?.currentTime -= 15
+                        } label: {
+                            Image(systemName: "gobackward.15").font(.system(size: 40)).padding()
+                        }
+                    }
+                    
+                    switch viewState {
+                    case .waitingForPlayStart:
+                        Button {
+                            audioPlayer.startPlayback(recording: recording)
+                            withAnimation {
+                                viewState = .playback
                             }
+                        } label: {
+                            Image(systemName: "play.fill")
+                                .foregroundColor(.pitchpinGray)
+                                .font(.system(size: 40))
+                                .padding(30)
+                                .background(Color.accentColor.clipShape(Circle()))
                         }
-                        .tint(.primary)
-                        
-                        // Time passed & Time remaining
-                        HStack {
-                            Text(DateComponentsFormatter.positional.string(from: player.currentTime) ?? "0:00")
-                            Spacer()
-                            Text("-\(DateComponentsFormatter.positional.string(from: (player.duration - player.currentTime) ) ?? "0:00")")
-                        }
-                        .font(.caption)
-                        .foregroundColor(.white)
-                        
-                        HStack(spacing: 15) {
-                            // Play/Pause Button
-                            Button {
+                    case .playback:
+                        Button {
+                            if audioPlayer.isPlaying {
+                                // Pause
+                                audioPlayer.pausePlayback()
+                            } else {
+                                // Play
+                                audioPlayer.resumePlayback()
+                            }
+                        } label: {
+                            var icon: String {
                                 if audioPlayer.isPlaying {
                                     // Pause
-                                    audioPlayer.pausePlayback()
+                                    return "pause.fill"
                                 } else {
                                     // Play
-                                    audioPlayer.resumePlayback()
+                                    return "play.fill"
                                 }
-                            } label: {
-                                Image(systemName: audioPlayer.isPlaying ? "pause.fill" : "play.fill")
-                                    .font(.title2)
-                                    .imageScale(.large)
-                                    .foregroundColor(.white)
                             }
                             
-                            // Recording name
-                            Text(currentlyPlaying.name)
-                                .fontWeight(.semibold)
-                                .lineLimit(1)
-                                .foregroundColor(.white)
-                            
-                            Spacer()
-                            
-                            // Stop button
-                            Button {
-                                audioPlayer.stopPlayback()
-                            } label: {
-                                Image(systemName: "xmark.circle.fill")
-                                    .foregroundColor(.white)
-                                    .font(.title2)
-                                    .imageScale(.large)
-                                    .symbolRenderingMode(.hierarchical)
-                            }
-                            
+                            Image(systemName: icon)
+                                .foregroundColor(.pitchpinGray)
+                                .font(.system(size: 50))
+                                .padding(30)
+                                .background(Color.accentColor.clipShape(Circle()))
                         }
-                        .padding(.top, 10)
                     }
-                    .padding()
-                    .foregroundColor(.primary)
-                    .onAppear {
-                        sliderValue = 0
-                    }
-                    .onReceive(timer) { _ in
-                        guard let player = audioPlayer.audioPlayer, !isDragging else { return }
-                        sliderValue = player.currentTime
-                    }
-                    .transition(.scale(scale: 0, anchor: .bottom))
                     
-                    Divider()
+                    if viewState == .playback {
+                        Button {
+                            audioPlayer.audioPlayer?.currentTime += 15
+                        } label: {
+                            Image(systemName: "goforward.15").font(.system(size: 40)).padding()
+                        }
+                    }
                 }
+                
+                if viewState == .playback {
+                    Button {
+                        if let currentTime = audioPlayer.audioPlayer?.currentTime {
+                            recording.pins.append(.init(notes: "", timestamp: currentTime))
+                        }
+                    } label: {
+                        ZStack {
+                            
+                            Image(systemName: "pin.fill").font(.system(size: 30))
+                        }
+                    }
+                    .buttonStyle(PinButtonStyle())
+                    .padding()
+                }
+                
+            }
+            .padding()
+        }.onDisappear {
+            if viewState == .playback {
+                audioPlayer.pausePlayback()
             }
         }
     }
 }
 
 #Preview {
-    AudioDetailView(audioPlayer: AudioPlayer(), recording: .init(name: "test", created: Date(), pins: [.init(notes: "", timestamp: 0.71333)]))
+    AudioDetailView(audioPlayer: AudioPlayer(), recording: .constant(.init(name: "test", created: Date(), pins: [.init(notes: "", timestamp: 0.71333)])))
 }
