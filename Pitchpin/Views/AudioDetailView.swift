@@ -105,8 +105,7 @@ struct AudioPlaybackView: View {
             }
             
             Button {
-                    recording.pins.append(.init(notes: "", timestamp: audioPlayer.audioPlayer.currentTime))
-                
+                recording.pins.append(.init(notes: "", timestamp: audioPlayer.audioPlayer.currentTime))
             } label: {
                 ZStack {
                     

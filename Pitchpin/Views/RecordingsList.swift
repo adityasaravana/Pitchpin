@@ -11,44 +11,33 @@ import AVFoundation
 
 struct RecordingsList: View {
     @EnvironmentObject var recordings: Recordings
-    @State var search = ""
-    enum SortOption {
-        case name, createdLatestToFirst, createdFirstToLatest
-    }
-    
-    @State private var sortOption: SortOption = .createdLatestToFirst
-    
-    var sortedTasks: [Recording] {
-        switch sortOption {
-        case .name:
-            return recordings.recordings.sorted { $0.name < $1.name }
-        case .createdLatestToFirst:
-            return recordings.recordings.sorted { $0.created < $1.created }
-        case .createdFirstToLatest:
-            return recordings.recordings.sorted { $1.created < $0.created }
-        }
-    }
     
     var body: some View {
         
         NavigationView {
-            List {
-                if recordings.recordings.isEmpty {
+            if recordings.recordings.isEmpty {
+                VStack {
                     Text("↓ Why not record something special? ↓")
+                        .foregroundStyle(.gray)
+                    Spacer()
                 }
-                ForEach($recordings.recordings, id: \.id) { recording in
-                    RecordingRow(recording: recording)
+                .padding()
+                .navigationTitle("Recordings")
+            } else {
+                List {
                     
+                    ForEach($recordings.recordings, id: \.id) { recording in
+                        RecordingRow(recording: recording)
+                        
+                    }
+                    .onDelete(perform: delete)
                 }
-                .onDelete(perform: delete)
+                .navigationTitle("Recordings")
+                .toolbar {
+                    EditButton()
+                }
             }
-            .navigationTitle("Recordings")
-            .toolbar {
-//                ToolbarItem(placement: .topBarLeading) {
-//                    List Sorter here
-//                }
-                EditButton()
-            }
+            
         }
     }
     
@@ -86,7 +75,7 @@ struct RecordingRow: View {
             }
             
         }
-//        .tint(isPlayingThisRecording ? .green : .blue)
+        //        .tint(isPlayingThisRecording ? .green : .blue)
     }
     
     func getDuration(of recordingData: Data) -> TimeInterval? {

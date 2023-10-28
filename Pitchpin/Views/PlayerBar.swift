@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+#warning("TODO: Dragging the slider produces this weird glitch, try in sim.")
 struct PlayerBar: View {
     @ObservedObject var audioPlayer: AudioPlayer
     @State var sliderValue: Double = 0.0
