@@ -10,11 +10,10 @@ import CoreData
 
 struct ContentView: View {
     @EnvironmentObject var recordings: Recordings
-    @ObservedObject var audioPlayer = AudioPlayer()
     @ObservedObject var audioRecorder = AudioRecorder()
     
     var body: some View {
-        RecordingsList(audioPlayer: audioPlayer)
+        RecordingsList()
             .environmentObject(recordings)
             .safeAreaInset(edge: .bottom) {
                 bottomBar
@@ -23,7 +22,7 @@ struct ContentView: View {
     
     var bottomBar: some View {
         VStack {
-            RecorderBar(audioPlayer: audioPlayer)
+            RecorderBar().padding(.bottom)
         }
         
         .background (

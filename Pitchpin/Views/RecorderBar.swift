@@ -12,7 +12,6 @@ import DSWaveformImage
 struct RecorderBar: View {
     @ObservedObject var waveformManager = WaveformManager.shared
     @ObservedObject var audioRecorder = AudioRecorder()
-    @ObservedObject var audioPlayer: AudioPlayer
     
     @State var buttonSize: CGFloat = 1
     @State var liveConfiguration: Waveform.Configuration = Waveform.Configuration(
@@ -96,17 +95,9 @@ struct RecorderBar: View {
     
     
     func startRecording() {
-        if audioPlayer.audioPlayer?.isPlaying ?? false {
-            // stop any playing recordings
-            audioPlayer.stopPlayback()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                // Start Recording
-                audioRecorder.startRecording()
-            }
-        } else {
-            // Start Recording
+        
             audioRecorder.startRecording()
-        }
+        
     }
     
     func stopRecording() {
@@ -123,7 +114,7 @@ fileprivate struct PreviewView: View {
             Text("Hello, world!")
             Spacer()
         }.safeAreaInset(edge: .bottom) {
-            RecorderBar(audioPlayer: AudioPlayer())
+            RecorderBar()
                 .shadow(radius: 40)
                 .background(
                     .pitchpinGray

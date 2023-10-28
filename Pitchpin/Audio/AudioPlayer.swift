@@ -18,13 +18,27 @@ enum AudioPlayerState {
 }
 
 class AudioPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
-    @Published var currentlyPlaying: Recording?
-    @Published var isPlaying = false
     @Published var state: AudioPlayerState = .notPlaying
     
-    var recording: Recording?
+    var recording: Recording
     
-    var audioPlayer: AVAudioPlayer?
+    var audioPlayer: AVAudioPlayer
+    
+    init(recording: Recording) {
+        self.recording = recording
+        let playbackSession = AVAudioSession.sharedInstance()
+        do {
+            try playbackSession.setCategory(AVAudioSession.Category.playback, mode: AVAudioSession.Mode.spokenAudio)
+            try playbackSession.setActive(true)
+            print("Start Recording - Playback session setted")
+        } catch {
+            print("Play Recording - Failed to set up playback session")
+        }
+        audioPlayer = try! AVAudioPlayer(data: recording.data!)
+        
+        super.init()
+        audioPlayer.delegate = self
+    }
     
     func initialize(recording: Recording) {
         if let recordingData = recording.data {
@@ -40,7 +54,7 @@ class AudioPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
             
             do {
                 audioPlayer = try AVAudioPlayer(data: recordingData)
-                audioPlayer?.delegate = self
+                audioPlayer.delegate = self
                 
             } catch {
                 print("init Recording - docatch failed: - \(error)")
@@ -49,42 +63,25 @@ class AudioPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
     }
     
     func startPlayback(recording: Recording) {
-        audioPlayer?.play()
-        isPlaying = true
         state = .playing
-        print("Play Recording - Playing")
-        withAnimation(.spring()) {
-            currentlyPlaying = recording
-        }
+        audioPlayer.play()
+        
     }
     
     func pausePlayback() {
-        audioPlayer?.pause()
-        isPlaying = false
         state = .paused
-        print("Play Recording - Paused")
+        audioPlayer.pause()
+        
+        Task { print("Play Recording - Paused") }
     }
     
     func resumePlayback() {
-        audioPlayer?.play()
-        isPlaying = true
         state = .playing
-        print("Play Recording - Resumed")
+        audioPlayer.play()
+        
+        Task { print("Play Recording - Resumed") }
     }
     
-    func stopPlayback() {
-        if audioPlayer != nil {
-            audioPlayer?.stop()
-            isPlaying = false
-            state = .finished
-            print("Play Recording - Stopped")
-            withAnimation(.spring()) {
-                self.currentlyPlaying = nil
-            }
-        } else {
-            print("Play Recording - Failed to Stop playing - Coz the recording is not playing")
-        }
-    }
     
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         if flag {

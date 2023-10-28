@@ -10,7 +10,6 @@ import CoreData
 import AVFoundation
 
 struct RecordingsList: View {
-    @ObservedObject var audioPlayer: AudioPlayer
     @EnvironmentObject var recordings: Recordings
     @State var search = ""
     enum SortOption {
@@ -38,7 +37,7 @@ struct RecordingsList: View {
                     Text("↓ Why not record something special? ↓")
                 }
                 ForEach($recordings.recordings, id: \.id) { recording in
-                    RecordingRow(audioPlayer: audioPlayer, recording: recording)
+                    RecordingRow(recording: recording)
                     
                 }
                 .onDelete(perform: delete)
@@ -60,26 +59,13 @@ struct RecordingsList: View {
 
 struct RecordingRow: View {
     @State var showDetailView = false
-    @ObservedObject var audioPlayer: AudioPlayer
     @Binding var recording: Recording
     
-    var isPlayingThisRecording: Bool {
-        audioPlayer.currentlyPlaying?.id == recording.id
-    }
     
     var body: some View {
         HStack {
-//            Button {
-//                audioPlayer.startPlayback(recording: recording)
-//            } label: {
-//                Image(systemName: "play.circle.fill")
-//                    .imageScale(.large)
-//                    .symbolRenderingMode(.palette)
-//                    .foregroundStyle(.primary, .tertiary)
-//            }
             VStack(alignment: .leading) {
                 Text(recording.name)
-                    .fontWeight(isPlayingThisRecording ? .bold : .regular)
                 Group {
                     if let recordingData = recording.data, let duration = getDuration(of: recordingData) {
                         Text(DateComponentsFormatter.positional.string(from: duration) ?? "0:00")
@@ -96,7 +82,7 @@ struct RecordingRow: View {
                     .foregroundColor(.gray)
             }
             .sheet(isPresented: $showDetailView) {
-                AudioDetailView(audioPlayer: audioPlayer, recording: $recording)
+                AudioDetailView(recording: $recording)
             }
             
         }
@@ -115,6 +101,6 @@ struct RecordingRow: View {
 
 struct RecordingsList_Previews: PreviewProvider {
     static var previews: some View {
-        RecordingsList(audioPlayer: AudioPlayer()).environmentObject(Recordings.shared)
+        RecordingsList().environmentObject(Recordings.shared)
     }
 }
