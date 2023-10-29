@@ -18,6 +18,7 @@
 		027811DB28897AD200A4A61D /* RecordingsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027811DA28897AD200A4A61D /* RecordingsList.swift */; };
 		027811DD2889932100A4A61D /* PlayerBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027811DC2889932100A4A61D /* PlayerBar.swift */; };
 		590B69332AE8C02B004BE51E /* AudioDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590B69322AE8C02B004BE51E /* AudioDetailView.swift */; };
+		591CB69C2AEEFCF400ABE5EC /* DateHelper in Frameworks */ = {isa = PBXBuildFile; productRef = 591CB69B2AEEFCF400ABE5EC /* DateHelper */; };
 		594D2A4D2A5D241A00EA231C /* SCAudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 594D2A4B2A5D241900EA231C /* SCAudioManager.m */; };
 		594D2A4F2A5D243600EA231C /* WaveformManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594D2A4E2A5D243600EA231C /* WaveformManager.swift */; };
 		59BFFD022A5E47C0007B5EBE /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BFFD012A5E47C0007B5EBE /* RoundedCorner.swift */; };
@@ -60,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				591CB69C2AEEFCF400ABE5EC /* DateHelper in Frameworks */,
 				59FAD3F42AD372D500425775 /* Defaults in Frameworks */,
 				59D7178B2A7DCFD0005B0C49 /* DSWaveformImage in Frameworks */,
 				59D7178D2A7DCFD0005B0C49 /* DSWaveformImageViews in Frameworks */,
@@ -165,6 +167,7 @@
 				59D7178A2A7DCFD0005B0C49 /* DSWaveformImage */,
 				59D7178C2A7DCFD0005B0C49 /* DSWaveformImageViews */,
 				59FAD3F32AD372D500425775 /* Defaults */,
+				591CB69B2AEEFCF400ABE5EC /* DateHelper */,
 			);
 			productName = VoiceRecTest;
 			productReference = 027811B52889753F00A4A61D /* Pitchpin.app */;
@@ -198,6 +201,7 @@
 			packageReferences = (
 				59D717892A7DCFD0005B0C49 /* XCRemoteSwiftPackageReference "DSWaveformImage" */,
 				59FAD3F22AD372D500425775 /* XCRemoteSwiftPackageReference "Defaults" */,
+				591CB69A2AEEFCF400ABE5EC /* XCRemoteSwiftPackageReference "DateHelper" */,
 			);
 			productRefGroup = 027811B62889753F00A4A61D /* Products */;
 			projectDirPath = "";
@@ -473,6 +477,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		591CB69A2AEEFCF400ABE5EC /* XCRemoteSwiftPackageReference "DateHelper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/melvitax/DateHelper.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.1;
+			};
+		};
 		59D717892A7DCFD0005B0C49 /* XCRemoteSwiftPackageReference "DSWaveformImage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dmrschmidt/DSWaveformImage.git";
@@ -492,6 +504,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		591CB69B2AEEFCF400ABE5EC /* DateHelper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 591CB69A2AEEFCF400ABE5EC /* XCRemoteSwiftPackageReference "DateHelper" */;
+			productName = DateHelper;
+		};
 		59D7178A2A7DCFD0005B0C49 /* DSWaveformImage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 59D717892A7DCFD0005B0C49 /* XCRemoteSwiftPackageReference "DSWaveformImage" */;

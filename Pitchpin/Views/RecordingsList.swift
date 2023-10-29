@@ -25,7 +25,6 @@ struct RecordingsList: View {
                 .navigationTitle("Recordings")
             } else {
                 List {
-                    
                     ForEach($recordings.recordings, id: \.id) { recording in
                         RecordingRow(recording: recording)
                         

@@ -10,6 +10,7 @@ import SwiftUI
 import AVFoundation
 import Combine
 import CoreData
+import DateHelper
 
 class AudioRecorder: NSObject,ObservableObject {
     var recordings = Recordings.shared
@@ -55,7 +56,7 @@ class AudioRecorder: NSObject,ObservableObject {
         let currentDateTime = Date.now
         
         recordingDate = currentDateTime
-        recordingName = "\(currentDateTime.toString(dateFormat: "dd-MM-YY_'at'_HH:mm:ss"))"
+        recordingName = currentDateTime.toString(dateStyle: .medium, timeStyle: .short) ?? "Recording"
         
         // save the recording to the temporary directory
         let tempDirectory = FileManager.default.temporaryDirectory
@@ -72,10 +73,7 @@ class AudioRecorder: NSObject,ObservableObject {
         do {
             audioRecorder = try AVAudioRecorder(url: recordingFileURL, settings: settings)
             audioRecorder?.record()
-            
-            withAnimation {
-                isRecording = true
-            }
+            isRecording = true
             print("Start Recording - Recording Started")
         } catch {
             print("Start Recording - Could not start recording")
@@ -87,11 +85,7 @@ class AudioRecorder: NSObject,ObservableObject {
     func stopRecording() {
         
         audioRecorder?.stop()
-        
-        withAnimation {
-            isRecording = false
-        }
-        
+        isRecording = false
         if let recordingURL {
             do {
                 let recordingDate = try Data(contentsOf: recordingURL)

@@ -27,7 +27,7 @@ struct ContentView: View {
         
         .background (
             Color.pitchpinGray
-                .cornerRadius(20, corners: [.topLeft, .topRight])
+                .cornerRadius(15, corners: [.topLeft, .topRight])
                 .edgesIgnoringSafeArea(.all)
         )
         
