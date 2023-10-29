@@ -15,8 +15,8 @@ import DateHelper
 class AudioRecorder: NSObject,ObservableObject {
     var recordings = Recordings.shared
     
-//    let moc = PersistenceController.shared.container.viewContext
-
+    //    let moc = PersistenceController.shared.container.viewContext
+    
     var audioRecorder: AVAudioRecorder?
     
     @Published private var recordingName = "Recording1"
@@ -29,12 +29,12 @@ class AudioRecorder: NSObject,ObservableObject {
     // MARK: - Pin
     
     func pin() {
-       
-            if let currentTime: TimeInterval = audioRecorder?.currentTime {
-                // Do something with currentTime
-                print("Current time of recording: \(currentTime) seconds")
-                timestamps.append(currentTime)
-            }
+        
+        if let currentTime: TimeInterval = audioRecorder?.currentTime {
+            // Do something with currentTime
+            print("Current time of recording: \(currentTime) seconds")
+            timestamps.append(currentTime)
+        }
         
     }
     
@@ -83,9 +83,9 @@ class AudioRecorder: NSObject,ObservableObject {
     // MARK: - Stop Recording
     
     func stopRecording() {
-        
         audioRecorder?.stop()
         isRecording = false
+        
         if let recordingURL {
             do {
                 let recordingDate = try Data(contentsOf: recordingURL)
@@ -95,7 +95,6 @@ class AudioRecorder: NSObject,ObservableObject {
             } catch {
                 print("Stop Recording - Could not save to CoreData - Cannot get the recording data from URL: \(error)")
             }
-            
         } else {
             print("Stop Recording -  Could not save to CoreData - Cannot find the recording URL")
         }
@@ -121,12 +120,11 @@ class AudioRecorder: NSObject,ObservableObject {
     func deleteRecordingFile() {
         if let recordingURL {
             do {
-               try FileManager.default.removeItem(at: recordingURL)
+                try FileManager.default.removeItem(at: recordingURL)
                 print("Stop Recording - Successfully deleted the recording file")
             } catch {
                 print("Stop Recording - Could not delete the recording file - Cannot find the recording URL")
             }
         }
     }
-    
 }

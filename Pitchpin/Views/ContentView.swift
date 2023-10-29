@@ -13,21 +13,25 @@ struct ContentView: View {
     @ObservedObject var audioRecorder = AudioRecorder()
     
     var body: some View {
-        RecordingsList()
-            .environmentObject(recordings)
-            .safeAreaInset(edge: .bottom) {
-                bottomBar
-            }
+        VStack {
+            RecordingsList()
+                .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                .environmentObject(recordings)
+            bottomBar
+        }
+//            .safeAreaInset(edge: .bottom) {
+//                bottomBar
+//            }
     }
     
     var bottomBar: some View {
         VStack {
-            RecorderBar().padding(.bottom)
+            RecorderBar()
         }
-        
+//        .frame(height: 0)
         .background (
             Color.pitchpinGray
-                .cornerRadius(15, corners: [.topLeft, .topRight])
+//                .cornerRadius(15, corners: [.topLeft, .topRight])
                 .edgesIgnoringSafeArea(.all)
         )
         
