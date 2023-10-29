@@ -14,7 +14,7 @@ struct RecorderBar: View {
     @ObservedObject var audioRecorder = AudioRecorder()
     
     @State var buttonSize: CGFloat = 1
-    @State var liveConfiguration: Waveform.Configuration = Waveform.Configuration(
+    @State var liveConfiguration: Waveform.Configuration = Waveform.Configuration (
         style: .striped(.init(color: .red, width: 3, spacing: 3))
     )
     
@@ -23,15 +23,19 @@ struct RecorderBar: View {
             .repeatForever()
     }
     
+    let recordButtonSize: CGFloat = 105
+        
     var body: some View {
         VStack {
             // TODO: - Only show this while recording but without making the button gigantic while it isn't.
-            WaveformLiveCanvas(
-                samples: waveformManager.samples,
-                configuration: liveConfiguration,
-                renderer: LinearWaveformRenderer(),
-                shouldDrawSilencePadding: true
-            )
+            if audioRecorder.isRecording {
+                WaveformLiveCanvas(
+                    samples: waveformManager.samples,
+                    configuration: liveConfiguration,
+                    renderer: LinearWaveformRenderer(),
+                    shouldDrawSilencePadding: true
+                )
+            }
             
             
             if let audioRecorder = audioRecorder.audioRecorder, audioRecorder.isRecording {
@@ -40,51 +44,46 @@ struct RecorderBar: View {
                     Text(DateComponentsFormatter.positional.string(from: audioRecorder.currentTime) ?? "0:00")
                         .font(.title3)
                         .fontWeight(.semibold)
+                        .foregroundStyle(.white)
                 }
                 .transition(.scale)
             }
             
             
-            
-            
-            GeometryReader { geometry in
-                ZStack {
-                    
-                    let minDimension = min(geometry.size.width, geometry.size.height)
-                    
+            ZStack {
+                Button {
+                    if audioRecorder.isRecording {
+                        waveformManager.stop()
+                        stopRecording()
+                    } else {
+                        waveformManager.activate()
+                        startRecording()
+                    }
+                } label: {
+                    RecordButtonShape(isRecording: audioRecorder.isRecording)
+                        .fill(.red).frame(width: recordButtonSize)
+                }
+                
+                Circle()
+                    .strokeBorder(lineWidth: 5)
+                    .frame(width: recordButtonSize)
+                    .foregroundColor(.white)
+                
+                HStack {
                     Button {
                         if audioRecorder.isRecording {
-                            waveformManager.stop()
-                            stopRecording()
-                        } else {
-                            waveformManager.activate()
-                            startRecording()
+                            audioRecorder.pin()
                         }
                     } label: {
-                        RecordButtonShape(isRecording: audioRecorder.isRecording)
-                            .fill(.red)
-                    }
-                    
-                    Circle()
-                        .strokeBorder(lineWidth: minDimension * 0.05)
-                        .foregroundColor(.white)
-                    
-                    HStack {
-                        Button {
-                            if audioRecorder.isRecording {
-                                audioRecorder.pin()
-                            }
-                        } label: {
-                            ZStack {
-                                
-                                    Image(systemName: "pin.fill").font(.system(size: 30))
-                            }
+                        ZStack {
+                            
+                                Image(systemName: "pin.fill").font(.system(size: 30))
                         }
-                        .buttonStyle(PinButtonStyle())
-                        .padding()
-                        
-                        Spacer()
                     }
+                    .buttonStyle(PinButtonStyle())
+                    .padding()
+                    
+                    Spacer()
                 }
             }
         }
