@@ -115,7 +115,7 @@ struct AudioPlaybackView: View {
             .buttonStyle(PinButtonStyle())
             .padding()
         }
-        .onAppear {
+        .task {
             audioPlayer.initialize(recording: recording)
         }
         .onDisappear {

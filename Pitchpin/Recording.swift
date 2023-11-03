@@ -8,7 +8,7 @@
 import Foundation
 import Defaults
 
-struct Recording: Codable, Defaults.Serializable {
+struct Recording: Codable, Defaults.Serializable, Identifiable {
     var id = UUID()
     var name: String
     var created: Date

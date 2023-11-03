@@ -25,7 +25,7 @@ struct RecordingsList: View {
                 .navigationTitle("Recordings")
             } else {
                 List {
-                    ForEach($recordings.recordings, id: \.id) { recording in
+                    ForEach($recordings.recordings.reversed(), id: \.id) { recording in
                         RecordingRow(recording: recording)
                         
                     }
@@ -51,29 +51,31 @@ struct RecordingRow: View {
     
     
     var body: some View {
-        HStack {
-            VStack(alignment: .leading) {
-                Text(recording.name)
-                Group {
-                    if let recordingData = recording.data, let duration = getDuration(of: recordingData) {
-                        Text(DateComponentsFormatter.positional.string(from: duration) ?? "0:00")
-                            .font(.caption2)
-                            .foregroundColor(.secondary)
+        Button {
+            showDetailView = true
+        } label: {
+            HStack {
+                VStack(alignment: .leading) {
+                    Text(recording.name).foregroundStyle(.black)
+                    Group {
+                        if let recordingData = recording.data, let duration = getDuration(of: recordingData) {
+                            Text(DateComponentsFormatter.positional.string(from: duration) ?? "0:00")
+                                .font(.caption2)
+                                .foregroundColor(.secondary)
+                        }
                     }
                 }
-            }
-            Spacer()
-            Button {
-                showDetailView = true
-            } label: {
+                Spacer()
+                
                 Image(systemName: "chevron.right")
                     .foregroundColor(.gray)
             }
-            .sheet(isPresented: $showDetailView) {
-                AudioDetailView(recording: $recording)
-            }
             
         }
+        .sheet(isPresented: $showDetailView) {
+            AudioDetailView(recording: $recording)
+        }
+        
         //        .tint(isPlayingThisRecording ? .green : .blue)
     }
     
