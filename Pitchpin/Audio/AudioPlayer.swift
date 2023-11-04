@@ -45,7 +45,8 @@ class AudioPlayer: NSObject, ObservableObject, AVAudioPlayerDelegate {
             let playbackSession = AVAudioSession.sharedInstance()
             
             do {
-                try playbackSession.setCategory(AVAudioSession.Category.playback, mode: AVAudioSession.Mode.spokenAudio)
+//                try playbackSession.setCategory(AVAudioSession.Category.playback, mode: AVAudioSession.Mode.spokenAudio)
+                try playbackSession.setCategory(.playback, mode: .moviePlayback, options: .duckOthers)
                 try playbackSession.setActive(true)
                 print("Start Recording - Playback session setted")
             } catch {

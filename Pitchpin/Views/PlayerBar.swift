@@ -21,6 +21,15 @@ struct PlayerBar: View {
     var body: some View {
         VStack {
                 VStack {
+                    GeometryReader { gr in
+                                        Capsule()
+                                            .stroke(Color.blue, lineWidth: 2)
+                                            .background(
+                                                Capsule()
+                                                    .foregroundColor(Color.blue)
+                                                    .frame(width: gr.size.width * (audioPlayer.audioPlayer.currentTime / audioPlayer.audioPlayer.duration) , height: 8), alignment: .leading)
+                                    }
+                                    .frame( height: 8)
                     // Slider
                     Slider(value: $sliderValue, in: 0...(audioPlayer.audioPlayer.duration )) { dragging in
                         print("Editing the slider: \(dragging)")

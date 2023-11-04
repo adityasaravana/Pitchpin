@@ -25,7 +25,7 @@ struct RecordingsList: View {
                 .navigationTitle("Recordings")
             } else {
                 List {
-                    ForEach($recordings.recordings.reversed(), id: \.id) { recording in
+                    ForEach($recordings.recordings, id: \.id) { recording in
                         RecordingRow(recording: recording)
                         
                     }
@@ -56,7 +56,7 @@ struct RecordingRow: View {
         } label: {
             HStack {
                 VStack(alignment: .leading) {
-                    Text(recording.name).foregroundStyle(.black)
+                    Text(recording.name).foregroundStyle(.foreground)
                     Group {
                         if let recordingData = recording.data, let duration = getDuration(of: recordingData) {
                             Text(DateComponentsFormatter.positional.string(from: duration) ?? "0:00")
