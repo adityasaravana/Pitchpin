@@ -13,7 +13,6 @@ struct PlayerBar: View {
     @State private var isDragging = false
     @Binding var recording: Recording
     
-    
     let timer = Timer
         .publish(every: 0.025, on: .main, in: .common)
         .autoconnect()
@@ -26,7 +25,7 @@ struct PlayerBar: View {
                         Capsule()
                             .stroke(Color.red, lineWidth: 2)
                             .background(
-                                Capsule()
+                                Rectangle()
                                     .foregroundColor(Color.red)
                                     .frame(width: geometry.size.width * (audioPlayer.audioPlayer.currentTime / audioPlayer.audioPlayer.duration) , height: 8), alignment: .leading)
                         
@@ -105,7 +104,7 @@ struct PinView: View {
 struct ProgressSliderCapsuleView: View {
     var body: some View {
         Capsule()
-            .frame(width: 5, height: 25)
+            .frame(width: 5, height: 30)
             .foregroundStyle(.gray.opacity(0.2))
     }
 }
