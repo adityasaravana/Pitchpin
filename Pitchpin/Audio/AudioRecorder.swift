@@ -11,6 +11,7 @@ import AVFoundation
 import Combine
 import CoreData
 import DateHelper
+import DSWaveformImage
 
 class AudioRecorder: NSObject,ObservableObject {
     var recordings = Recordings.shared
@@ -22,6 +23,7 @@ class AudioRecorder: NSObject,ObservableObject {
     @Published private var recordingName = "Recording1"
     @Published private var recordingDate = Date()
     @Published private var recordingURL: URL?
+    @Published private var recordingWaveformRender: UIImage?
     @Published private var timestamps: [TimeInterval] = []
     
     @Published var isRecording = false
@@ -81,6 +83,7 @@ class AudioRecorder: NSObject,ObservableObject {
     }
     
     // MARK: - Stop Recording
+   
     
     func stopRecording() {
         audioRecorder?.stop()
@@ -104,17 +107,29 @@ class AudioRecorder: NSObject,ObservableObject {
     // MARK: - Saving Recordings --------------------------------------
     
     func saveRecording(recordingData: Data) {
-        var pins: [Pin] = []
-        
-        for timestamp in timestamps {
-            pins.append(.init(notes: "", timestamp: timestamp))
-            print("!!!!!!!!!!!!!")
-            print(timestamp)
-            print("!!!!!!!!!!!!!")
+        Task {
+//            if let audio = recordingURL {
+//                let waveformImageDrawer = WaveformImageDrawer()
+//                let image = try await waveformImageDrawer.waveformImage(
+//                    fromAudioAt: audio,
+//                    with: .init(size: CGSize(width: 200, height: 50), style: .filled(UIColor.red)),
+//                    renderer: LinearWaveformRenderer()
+//                )
+//                recordingWaveformRender = image
+//            }
+            
+            var pins: [Pin] = []
+            
+            for timestamp in timestamps {
+                pins.insert(.init(notes: "", timestamp: timestamp), at: 0)
+                print("!!!!!!!!!!!!!")
+                print(timestamp)
+                print("!!!!!!!!!!!!!")
+            }
+            
+            let newRecording = Recording(name: recordingName, created: recordingDate, data: recordingData, pins: pins, audioURL: recordingURL)
+            recordings.recordings.append(newRecording)
         }
-        
-        let newRecording = Recording(name: recordingName, created: recordingDate, data: recordingData, pins: pins)
-        recordings.recordings.append(newRecording)
     }
     
     func deleteRecordingFile() {

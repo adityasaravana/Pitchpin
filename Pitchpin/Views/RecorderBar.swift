@@ -200,14 +200,3 @@ struct RecordButtonShape: Shape {
     }
 }
 
-struct PinButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .padding()
-            .background(configuration.isPressed ? .red : .yellow)
-            .foregroundColor(.white)
-            .clipShape(Circle())
-            .scaleEffect(configuration.isPressed ? 1.1 : 1)
-            .animation(.easeInOut(duration: 0.2), value: configuration.isPressed)
-    }
-}

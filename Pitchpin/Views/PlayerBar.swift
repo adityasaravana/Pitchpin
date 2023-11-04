@@ -29,7 +29,7 @@ struct PlayerBar: View {
                                     .foregroundColor(Color.red)
                                     .frame(width: geometry.size.width * (audioPlayer.audioPlayer.currentTime / audioPlayer.audioPlayer.duration) , height: 8), alignment: .leading)
                         
-                        PinMarks(recording: recording, totalDuration: audioPlayer.audioPlayer.duration)
+                        PinMarks(sliderValue: $sliderValue, recording: recording, totalDuration: audioPlayer.audioPlayer.duration)
                             .frame(width: geometry.size.width)
                         
                         ProgressSliderCapsuleView()
@@ -72,13 +72,14 @@ struct PlayerBar: View {
 }
 
 struct PinMarks: View {
+    @Binding var sliderValue: Double
     let recording: Recording
     let totalDuration: TimeInterval
     var body: some View {
         GeometryReader { geometry in
             ZStack {
                 ForEach(recording.pins, id: \.self) { timestamp in
-                    PinView(timestamp: timestamp, totalDuration: totalDuration, geometry: geometry)
+                    PinView(sliderValue: $sliderValue, timestamp: timestamp, totalDuration: totalDuration, geometry: geometry)
                 }
             }
         }
@@ -86,6 +87,7 @@ struct PinMarks: View {
 }
 
 struct PinView: View {
+    @Binding var sliderValue: Double
     let timestamp: Pin
     let totalDuration: TimeInterval
     let geometry: GeometryProxy
@@ -98,6 +100,7 @@ struct PinView: View {
                 x: CGFloat(timestamp.timestamp / totalDuration) * geometry.size.width,
                 y: geometry.size.height / 2
             )
+            .animation(.easeInOut, value: sliderValue)
     }
 }
 
@@ -112,7 +115,7 @@ struct ProgressSliderCapsuleView: View {
 #Preview {
     VStack {
         GeometryReader { geometry in
-            PinView(timestamp: .init(notes: "", timestamp: 0.3), totalDuration: 1.0, geometry: geometry)
+            PinView(sliderValue: .constant(0.2), timestamp: .init(notes: "", timestamp: 0.3), totalDuration: 1.0, geometry: geometry)
         }
         ProgressSliderCapsuleView()
     }

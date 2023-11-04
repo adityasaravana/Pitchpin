@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import DSWaveformImage
 
 struct AudioDetailView: View {
     @Binding var recording: Recording
@@ -15,7 +16,7 @@ struct AudioDetailView: View {
     @State private var isDragging = false
     
     
-    
+    @State var waveform: UIImage? = nil
     
     var body: some View {
         ZStack {
@@ -26,9 +27,26 @@ struct AudioDetailView: View {
                 
                 Spacer()
                 
+                if waveform != nil {
+                    Image(uiImage: waveform!)
+                }
+                
                 AudioPlaybackView(recording: $recording)
             }
             .padding()
+        }
+        .onAppear {
+            Task {
+                if let url = recording.audioURL {
+                    let waveformImageDrawer = WaveformImageDrawer()
+                    let image = try await waveformImageDrawer.waveformImage(
+                        fromAudioAt: url,
+                        with: .init(size: CGSize(width: 200, height: 50), style: .filled(UIColor.red)),
+                        renderer: LinearWaveformRenderer()
+                    )
+                    waveform = image
+                }
+            }
         }
     }
 }
@@ -105,7 +123,6 @@ struct AudioPlaybackView: View {
                 recording.pins.append(.init(notes: "", timestamp: audioPlayer.audioPlayer.currentTime))
             } label: {
                 ZStack {
-                    
                     Image(systemName: "pin.fill").font(.system(size: 30))
                 }
             }

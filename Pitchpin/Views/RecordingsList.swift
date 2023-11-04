@@ -27,7 +27,6 @@ struct RecordingsList: View {
                 List {
                     ForEach($recordings.recordings, id: \.id) { recording in
                         RecordingRow(recording: recording)
-                        
                     }
                     .onDelete(perform: delete)
                 }

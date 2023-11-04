@@ -7,6 +7,7 @@
 
 import Foundation
 import Defaults
+import UIKit
 
 struct Recording: Codable, Defaults.Serializable, Identifiable {
     var id = UUID()
@@ -14,6 +15,15 @@ struct Recording: Codable, Defaults.Serializable, Identifiable {
     var created: Date
     var data: Data?
     var pins: [Pin]
+    var audioURL: URL?
+//    var waveformData: Data?
+//    var waveformImage: UIImage? {
+//        if let waveformData {
+//            return UIImage(data: waveformData)!
+//        } else {
+//            return nil
+//        }
+//    }
     
     var duration: TimeInterval? {
         if let audio = self.data {
