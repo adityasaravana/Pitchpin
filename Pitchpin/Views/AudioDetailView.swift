@@ -49,9 +49,6 @@ struct AudioPlaybackView: View {
     var body: some View {
         VStack {
             PlayerBar(audioPlayer: audioPlayer, recording: $recording)
-                .overlay (
-                    PinDisplay(timestamps: recording.pins, totalDuration: recording.duration ?? 0)
-                )
             
             HStack {
                 Button {
@@ -128,31 +125,6 @@ struct AudioPlaybackView: View {
 
 #Preview {
     AudioDetailView(recording: .constant(.init(name: "test", created: Date(), pins: [.init(notes: "", timestamp: 0.71333)])))
-}
-
-struct PinDisplay: View {
-    let timestamps: [Pin]
-    let totalDuration: TimeInterval
-    var body: some View {
-        GeometryReader { geometry in
-            ZStack {
-                ForEach(timestamps, id: \.self) { timestamp in
-                    Image(systemName: "pin.fill")
-                        .frame(width: 5, height: 15)
-                        .foregroundColor(.yellow)
-                        .offset(x: CGFloat(timestamp.timestamp / totalDuration) * geometry.size.width, y: 12.5)
-                }
-            }
-        }
-    }
-}
-
-#Preview {
-    VStack {
-        Spacer()
-        PinDisplay(timestamps: [.init(notes: "", timestamp: 12)], totalDuration: 14)
-        Spacer()
-    }
 }
 
 struct RecordingTitleView: View {
