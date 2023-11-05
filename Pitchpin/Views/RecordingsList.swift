@@ -35,7 +35,6 @@ struct RecordingsList: View {
                     EditButton()
                 }
             }
-            
         }
     }
     
