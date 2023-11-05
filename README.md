@@ -14,6 +14,8 @@ Pitchpin is an open-source audio recorder app, like Voice Memos, with timestampi
 <br>
 
 ## Demo:
+https://github.com/adityasaravana/Pitchpin/assets/65321521/655d2bcd-c263-4e33-937d-f7295065df3e
+
 
 ## Libraries Used:
 - <a href="https://github.com/melvitax/DateHelper">DateHelper</a>: Makes default recording names.
