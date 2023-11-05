@@ -14,27 +14,25 @@ struct AudioDetailView: View {
     // Playback Progress
     @State var sliderValue: Double = 0.0
     @State private var isDragging = false
+    @ObservedObject var audioPlayer: AudioPlayer
     
-    
-//    @State var waveform: UIImage? = nil
+    init(recording: Binding<Recording>) {
+        self._recording = recording
+        self.audioPlayer = AudioPlayer(recording: recording.wrappedValue)
+    }
     
     var body: some View {
-        ZStack {
-            Color.pitchpinGray.edgesIgnoringSafeArea(.all)
+        VStack {
+            #warning("FIXME: TextField pushes entire view up and off of sheet.")
+            RecordingTitleView(audioPlayer: audioPlayer, name: $recording.name)
             
-            VStack {
-                RecordingTitleView(name: $recording.name)
-                
-                Spacer()
-                
-                
-                    
-                    
-                    AudioPlaybackView(recording: $recording)
-                
-            }
-            .padding()
+            Spacer()
+            
+            AudioPlaybackView(recording: $recording, audioPlayer: audioPlayer)
+            
         }
+        .padding()
+        .background(Color.pitchpinGray.edgesIgnoringSafeArea(.all))
         .onAppear {
             if recording.waveformImage == nil {
                 Task {
@@ -57,15 +55,11 @@ struct AudioPlaybackView: View {
     @Binding var recording: Recording
     @ObservedObject var audioPlayer: AudioPlayer
     
-    init(recording: Binding<Recording>) {
-        self._recording = recording
-        self.audioPlayer = AudioPlayer(recording: recording.wrappedValue)
-    }
     
     
     // View Updating
     
-//    let timer = Timer.publish(every: timerLatency, on: .main, in: .common).autoconnect()
+    //    let timer = Timer.publish(every: timerLatency, on: .main, in: .common).autoconnect()
     var body: some View {
         VStack {
             PlayerBar(audioPlayer: audioPlayer, recording: $recording)
@@ -149,6 +143,7 @@ struct AudioPlaybackView: View {
 }
 
 struct RecordingTitleView: View {
+    @ObservedObject var audioPlayer: AudioPlayer
     @State var editingName = false
     @Binding var name: String
     var body: some View {
@@ -161,6 +156,7 @@ struct RecordingTitleView: View {
                     .lineLimit(1)
             } else {
                 TextField("Name", text: $name)
+                    .textFieldStyle(.plain)
                     .font(.title)
                     .foregroundStyle(.white)
                     .lineLimit(1)
@@ -173,6 +169,7 @@ struct RecordingTitleView: View {
             if !editingName {
                 Button {
                     editingName = true
+                    audioPlayer.pausePlayback()
                 } label: {
                     Image(systemName: "square.and.pencil").font(.title)
                 }

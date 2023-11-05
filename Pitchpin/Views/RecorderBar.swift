@@ -217,6 +217,7 @@ struct PinAddedText: View {
         Text("🎉 Pin added! 🎉")
             .bold()
             .font(.caption2)
+            .foregroundStyle(.white)
             .transition(.scale)
             .onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {

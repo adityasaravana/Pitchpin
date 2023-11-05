@@ -63,6 +63,7 @@ struct RecordingRow: View {
                         }
                     }
                 }
+                
                 Spacer()
                 
                 Image(systemName: "chevron.right")
