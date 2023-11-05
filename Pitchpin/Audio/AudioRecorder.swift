@@ -110,14 +110,14 @@ class AudioRecorder: NSObject,ObservableObject {
         var pins: [Pin] = []
         
         for timestamp in timestamps {
-            pins.insert(.init(notes: "", timestamp: timestamp), at: 0)
+            pins.append(.init(notes: "", timestamp: timestamp))
             print("!!!!!!!!!!!!!")
             print(timestamp)
             print("!!!!!!!!!!!!!")
         }
         
         let newRecording = Recording(name: recordingName, created: recordingDate, data: recordingData, pins: pins, audioURL: recordingURL)
-        recordings.recordings.append(newRecording)
+        recordings.recordings.insert(newRecording, at: 0)
         
     }
     
