@@ -22,17 +22,20 @@ struct AudioDetailView: View {
     }
     
     var body: some View {
-        ZStack {
-            VStack {
-                RecordingTitleView(audioPlayer: audioPlayer, name: $recording.name)
-                Spacer()
-            }
-            
-            VStack {
-                Spacer()
-                AudioPlaybackView(recording: $recording, audioPlayer: audioPlayer)
+        GeometryReader { geometry in
+            ZStack {
+                VStack {
+                    RecordingTitleView(audioPlayer: audioPlayer, name: $recording.name)
+                    Spacer()
+                }
+                
+                VStack {
+                    Spacer()
+                    AudioPlaybackView(recording: $recording, audioPlayer: audioPlayer)
+                }
             }
         }
+        .ignoresSafeArea(.keyboard)
         .padding()
         .background(Color.pitchpinGray.edgesIgnoringSafeArea(.all))
         .onAppear {
@@ -182,6 +185,8 @@ struct RecordingTitleView: View {
                     Image(systemName: "checkmark.square").font(.title)
                 }
             }
-        }.padding()
+        }
+        .padding()
+        .ignoresSafeArea(.keyboard)
     }
 }

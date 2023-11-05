@@ -73,7 +73,7 @@ struct RecordingRow: View {
         }
         .sheet(isPresented: $showDetailView) {
             AudioDetailView(recording: $recording)
-        }
+        }.ignoresSafeArea(.keyboard, edges: .bottom)
         
         //        .tint(isPlayingThisRecording ? .green : .blue)
     }

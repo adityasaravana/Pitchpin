@@ -11,7 +11,6 @@ import Defaults
 class Recordings: ObservableObject {
     static let shared = Recordings()
 
-    
     @Published var recordings: [Recording] = [] {
         didSet {
             save()
