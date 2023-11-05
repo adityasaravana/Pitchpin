@@ -22,14 +22,16 @@ struct AudioDetailView: View {
     }
     
     var body: some View {
-        VStack {
-            #warning("FIXME: TextField pushes entire view up and off of sheet.")
-            RecordingTitleView(audioPlayer: audioPlayer, name: $recording.name)
+        ZStack {
+            VStack {
+                RecordingTitleView(audioPlayer: audioPlayer, name: $recording.name)
+                Spacer()
+            }
             
-            Spacer()
-            
-            AudioPlaybackView(recording: $recording, audioPlayer: audioPlayer)
-            
+            VStack {
+                Spacer()
+                AudioPlaybackView(recording: $recording, audioPlayer: audioPlayer)
+            }
         }
         .padding()
         .background(Color.pitchpinGray.edgesIgnoringSafeArea(.all))
