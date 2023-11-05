@@ -20,40 +20,52 @@ struct PlayerBar: View {
     var body: some View {
         VStack {
             VStack {
-                GeometryReader { geometry in
-                    ZStack {
-                        Capsule()
-                            .stroke(Color.red, lineWidth: 2)
-                            .background(
-                                Rectangle()
-                                    .foregroundColor(Color.red)
-                                    .frame(width: geometry.size.width * (audioPlayer.audioPlayer.currentTime / audioPlayer.audioPlayer.duration) , height: 8), alignment: .leading)
-                        
-                        PinMarks(sliderValue: $sliderValue, recording: recording, totalDuration: audioPlayer.audioPlayer.duration)
-                            .frame(width: geometry.size.width)
-                        
-                        ProgressSliderCapsuleView()
-                            .position(x: geometry.size.width * CGFloat(sliderValue / audioPlayer.audioPlayer.duration), y: geometry.size.height / 2)
-                            .gesture(
-                                DragGesture()
-                                    .onChanged { value in
-                                        let sliderWidth = geometry.size.width
-                                        let newSliderPosition = value.location.x / sliderWidth
-                                        sliderValue = min(max(0, Double(newSliderPosition) * audioPlayer.audioPlayer.duration), audioPlayer.audioPlayer.duration)
-                                        audioPlayer.audioPlayer.currentTime = sliderValue
-                                    }
-                            )
-                        // This modifier allows the knob to visually respond to taps and drags
-//                            .animation(.easeInOut, value: sliderValue)
+                ZStack {
+                    if recording.waveformImage != nil {
+                        Image(uiImage: recording.waveformImage!)
+                            .resizable()
+                            .frame(height: 200)
+                            .opacity(0.3)
                     }
+                    
+                    GeometryReader { geometry in
+                        ZStack {
+                            
+                            
+                            Capsule()
+                                .stroke(Color.red, lineWidth: 2)
+                                .background(
+                                    Rectangle()
+                                        .foregroundColor(Color.red)
+                                        .frame(width: geometry.size.width * (audioPlayer.audioPlayer.currentTime / audioPlayer.audioPlayer.duration) , height: 8), alignment: .leading)
+                            
+                            PinMarks(sliderValue: $sliderValue, recording: recording, totalDuration: audioPlayer.audioPlayer.duration)
+                                .frame(width: geometry.size.width)
+                            
+                            ProgressSliderCapsuleView()
+                                .position(x: geometry.size.width * CGFloat(sliderValue / audioPlayer.audioPlayer.duration), y: geometry.size.height / 2)
+                                .gesture(
+                                    DragGesture()
+                                        .onChanged { value in
+                                            let sliderWidth = geometry.size.width
+                                            let newSliderPosition = value.location.x / sliderWidth
+                                            sliderValue = min(max(0, Double(newSliderPosition) * audioPlayer.audioPlayer.duration), audioPlayer.audioPlayer.duration)
+                                            audioPlayer.audioPlayer.currentTime = sliderValue
+                                        }
+                                )
+                            // This modifier allows the knob to visually respond to taps and drags
+                            //                            .animation(.easeInOut, value: sliderValue)
+                        }
+                    }
+                    .frame(height: 8)
                 }
-                .frame(height: 8)
                 // Time passed & Time remaining
                 HStack {
-                    Text(DateComponentsFormatter.positional.string(from: audioPlayer.audioPlayer.currentTime ) ?? "0:00")
+                    Text(DateComponentsFormatter.positional.string(from: audioPlayer.audioPlayer.currentTime ) ?? "0:00").bold()
                     Spacer()
-                    Text("-\(DateComponentsFormatter.positional.string(from: ((audioPlayer.audioPlayer.duration ) - (audioPlayer.audioPlayer.currentTime )) ) ?? "0:00")")
+                    Text("-\(DateComponentsFormatter.positional.string(from: ((audioPlayer.audioPlayer.duration ) - (audioPlayer.audioPlayer.currentTime )) ) ?? "0:00")").bold()
                 }
+                
                 .font(.caption)
                 .foregroundColor(.white)
                 

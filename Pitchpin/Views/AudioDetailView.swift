@@ -16,7 +16,7 @@ struct AudioDetailView: View {
     @State private var isDragging = false
     
     
-    @State var waveform: UIImage? = nil
+//    @State var waveform: UIImage? = nil
     
     var body: some View {
         ZStack {
@@ -27,24 +27,26 @@ struct AudioDetailView: View {
                 
                 Spacer()
                 
-                if waveform != nil {
-                    Image(uiImage: waveform!)
-                }
                 
-                AudioPlaybackView(recording: $recording)
+                    
+                    
+                    AudioPlaybackView(recording: $recording)
+                
             }
             .padding()
         }
         .onAppear {
-            Task {
-                if let url = recording.audioURL {
-                    let waveformImageDrawer = WaveformImageDrawer()
-                    let image = try await waveformImageDrawer.waveformImage(
-                        fromAudioAt: url,
-                        with: .init(size: CGSize(width: 200, height: 50), style: .filled(UIColor.red)),
-                        renderer: LinearWaveformRenderer()
-                    )
-                    waveform = image
+            if recording.waveformImage == nil {
+                Task {
+                    if let url = recording.audioURL {
+                        let waveformImageDrawer = WaveformImageDrawer()
+                        let image = try await waveformImageDrawer.waveformImage(
+                            fromAudioAt: url,
+                            with: .init(size: CGSize(width: 200, height: 50), style: .filled(UIColor.red)),
+                            renderer: LinearWaveformRenderer()
+                        )
+                        recording.waveformData = image.pngData()!
+                    }
                 }
             }
         }
@@ -120,7 +122,9 @@ struct AudioPlaybackView: View {
             }
             
             Button {
+                audioPlayer.pausePlayback()
                 recording.pins.append(.init(notes: "", timestamp: audioPlayer.audioPlayer.currentTime))
+                audioPlayer.audioPlayer.currentTime = 0
             } label: {
                 ZStack {
                     Image(systemName: "pin.fill").font(.system(size: 30))

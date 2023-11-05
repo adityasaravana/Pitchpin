@@ -83,7 +83,7 @@ class AudioRecorder: NSObject,ObservableObject {
     }
     
     // MARK: - Stop Recording
-   
+    
     
     func stopRecording() {
         audioRecorder?.stop()
@@ -107,29 +107,18 @@ class AudioRecorder: NSObject,ObservableObject {
     // MARK: - Saving Recordings --------------------------------------
     
     func saveRecording(recordingData: Data) {
-        Task {
-//            if let audio = recordingURL {
-//                let waveformImageDrawer = WaveformImageDrawer()
-//                let image = try await waveformImageDrawer.waveformImage(
-//                    fromAudioAt: audio,
-//                    with: .init(size: CGSize(width: 200, height: 50), style: .filled(UIColor.red)),
-//                    renderer: LinearWaveformRenderer()
-//                )
-//                recordingWaveformRender = image
-//            }
-            
-            var pins: [Pin] = []
-            
-            for timestamp in timestamps {
-                pins.insert(.init(notes: "", timestamp: timestamp), at: 0)
-                print("!!!!!!!!!!!!!")
-                print(timestamp)
-                print("!!!!!!!!!!!!!")
-            }
-            
-            let newRecording = Recording(name: recordingName, created: recordingDate, data: recordingData, pins: pins, audioURL: recordingURL)
-            recordings.recordings.append(newRecording)
+        var pins: [Pin] = []
+        
+        for timestamp in timestamps {
+            pins.insert(.init(notes: "", timestamp: timestamp), at: 0)
+            print("!!!!!!!!!!!!!")
+            print(timestamp)
+            print("!!!!!!!!!!!!!")
         }
+        
+        let newRecording = Recording(name: recordingName, created: recordingDate, data: recordingData, pins: pins, audioURL: recordingURL)
+        recordings.recordings.append(newRecording)
+        
     }
     
     func deleteRecordingFile() {

@@ -24,18 +24,21 @@ struct RecorderBar: View {
     }
     
     let recordButtonSize: CGFloat = 105
-        
+    
+    
+    @State var showPinAddedText = false
+    
     var body: some View {
         VStack {
             // TODO: - Only show this while recording but without making the button gigantic while it isn't.
-            if audioRecorder.isRecording {
-                WaveformLiveCanvas(
-                    samples: waveformManager.samples,
-                    configuration: liveConfiguration,
-                    renderer: LinearWaveformRenderer(),
-                    shouldDrawSilencePadding: true
-                )
-            }
+            //            if audioRecorder.isRecording {
+            //                WaveformLiveCanvas(
+            //                    samples: waveformManager.samples,
+            //                    configuration: liveConfiguration,
+            //                    renderer: LinearWaveformRenderer(),
+            //                    shouldDrawSilencePadding: true
+            //                )
+            //            }
             
             
             if let audioRecorder = audioRecorder.audioRecorder, audioRecorder.isRecording {
@@ -70,18 +73,26 @@ struct RecorderBar: View {
                     .foregroundColor(.white)
                 
                 HStack {
-                    Button {
-                        if audioRecorder.isRecording {
-                            audioRecorder.pin()
+                    VStack {
+                        if showPinAddedText {
+                            PinAddedText(showingPinAddedText: $showPinAddedText)
                         }
-                    } label: {
-                        ZStack {
+                        Button {
                             
+                            if audioRecorder.isRecording {
+                                
+                                audioRecorder.pin()
+                                showPinAddedText = true
+                            }
+                        } label: {
+                            ZStack {
+                                
                                 Image(systemName: "pin.fill").font(.system(size: 30))
+                            }
                         }
+                        .buttonStyle(PinButtonStyle())
+                        .padding()
                     }
-                    .buttonStyle(PinButtonStyle())
-                    .padding()
                     
                     Spacer()
                 }
@@ -95,7 +106,7 @@ struct RecorderBar: View {
     
     func startRecording() {
         
-            audioRecorder.startRecording()
+        audioRecorder.startRecording()
         
     }
     
@@ -200,3 +211,23 @@ struct RecordButtonShape: Shape {
     }
 }
 
+struct PinAddedText: View {
+    @Binding var showingPinAddedText: Bool
+    var body: some View {
+        Text("🎉 Pin added! 🎉")
+            .bold()
+            .font(.caption2)
+            .transition(.scale)
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+                    withAnimation {
+                        self.showingPinAddedText = false
+                    }
+                })
+            }
+    }
+}
+
+#Preview {
+    PinAddedText(showingPinAddedText: .constant(true))
+}

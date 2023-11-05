@@ -16,14 +16,15 @@ struct Recording: Codable, Defaults.Serializable, Identifiable {
     var data: Data?
     var pins: [Pin]
     var audioURL: URL?
-//    var waveformData: Data?
-//    var waveformImage: UIImage? {
-//        if let waveformData {
-//            return UIImage(data: waveformData)!
-//        } else {
-//            return nil
-//        }
-//    }
+    
+    var waveformData: Data?
+    var waveformImage: UIImage? {
+        if let data = waveformData {
+            return UIImage(data: data)!
+        } else {
+            return nil
+        }
+    }
     
     var duration: TimeInterval? {
         if let audio = self.data {
